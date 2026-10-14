@@ -328,7 +328,7 @@
   if (galleryGrid) {
     galleryGrid.innerHTML = GALLERY.map((g, i) => `
       <figure class="gal-item reveal" data-src="${g.img}" style="transition-delay:${(i % 4) * 70}ms">
-        <img src="${g.img}" alt="${g.t}" loading="lazy">
+        <img src="${g.img}" alt="${g.t}" loading="lazy" decoding="async">
         <span class="gal-item__zoom"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
         <figcaption class="gal-item__overlay">
           <span>${g.s}</span>

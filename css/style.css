@@ -398,7 +398,7 @@ h1 span,h2 span{
   position:absolute;inset:0;
   background:
     linear-gradient(120deg,rgba(11,31,63,.96),rgba(18,44,92,.92)),
-    url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1600&q=70') center/cover no-repeat;
+    url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1400&q=66') center/cover no-repeat;
 }
 .stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;position:relative;z-index:2}
 .stat{
