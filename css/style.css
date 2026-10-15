@@ -196,10 +196,16 @@ h1 span,h2 span{
 
 .hero__content{color:#fff;max-width:760px;position:relative;z-index:2}
 .hero__eyebrow{
+  position:relative;
   display:inline-flex;align-items:center;gap:9px;font-family:var(--font);font-weight:700;
   font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
   background:rgba(251,176,25,.16);border:1px solid rgba(251,176,25,.45);
-  padding:9px 18px;border-radius:999px;margin-bottom:22px;
+  padding:9px 18px;border-radius:999px;margin-bottom:28px;
+}
+.hero__eyebrow::after{
+  content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-13px;
+  width:58px;height:3px;border-radius:2px;background:var(--accent);
+  box-shadow:0 0 16px rgba(251,176,25,.75);
 }
 .hero h1{color:#fff;margin-bottom:20px}
 .hero h1 span{color:var(--accent);background:none}
