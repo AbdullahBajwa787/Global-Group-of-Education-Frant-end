@@ -48,16 +48,16 @@
      DATA
   --------------------------------------------------------- */
   // Partner universities — official GGE partner logos (source: globalgroupofeducationportal.com)
-  const UNIVERSITIES = [
-    { name: "", alt: "Partner University", loc: "United Kingdom", logo: "assets/universities/logo-1.png" },
-    { name: "", alt: "Partner University", loc: "United Kingdom", logo: "assets/universities/logo-2.png" },
-    { name: "", alt: "Partner University", loc: "United Kingdom", logo: "assets/universities/logo-3.png" },
-    { name: "", alt: "Partner University", loc: "United Kingdom", logo: "assets/universities/logo-4.png" },
-    { name: "", alt: "Partner University", loc: "United Kingdom", logo: "assets/universities/logo-5.png" },
-    { name: "", alt: "Partner University", loc: "United Kingdom", logo: "assets/universities/logo-6.png" },
-    { name: "", alt: "Partner University", loc: "United Kingdom", logo: "assets/universities/logo-7.png" },
-    { name: "", alt: "Partner University", loc: "United Kingdom", logo: "assets/universities/logo-8.png" }
-  ];
+const UNIVERSITIES = [
+{ name: "University of Chichester", alt: "University of Chichester", loc: "United Kingdom", logo: "assets/universities/logo-1.png" },
+{ name: "University of Sunderland", alt: "University of Sunderland", loc: "United Kingdom", logo: "assets/universities/logo-2.png" },
+{ name: "University of Bolton", alt: "University of Bolton", loc: "United Kingdom", logo: "assets/universities/logo-3.png" },
+{ name: "Falmouth University", alt: "Falmouth University", loc: "United Kingdom", logo: "assets/universities/logo-4.png" },
+{ name: "Queen's University Belfast", alt: "Queen's University Belfast", loc: "United Kingdom", logo: "assets/universities/logo-5.png" },
+{ name: "University of Surrey", alt: "University of Surrey", loc: "United Kingdom", logo: "assets/universities/logo-6.png" },
+{ name: "University of Huddersfield", alt: "University of Huddersfield", loc: "United Kingdom", logo: "assets/universities/logo-7.png" },
+{ name: "University of Strathclyde", alt: "University of Strathclyde", loc: "United Kingdom", logo: "assets/universities/logo-8.png" }
+];
 
   const FAQS = [
     { q: "Is it difficult to obtain visas for overseas studies?", a: "If you have all the verifications done, all the documents sorted, filled in accurately every information asked and also have filled in other forms correctly like scholarship forms etc., then it is not hard to get the visa but all of this takes time in processing and this should be done months before the application date." },
@@ -178,19 +178,12 @@
   function uniCardHTML(u, i) {
     const initials = uniInitials(u.name || "University Partner");
     const badge = u.logo
-      ? `<img src="${u.logo}" alt="${u.alt || u.name || "Partner University"}" loading="lazy" onerror="this.remove();this.parentNode.insertAdjacentHTML('beforeend','<span class=\\'fallback\\'>${initials}</span>')">`
+      ? `<img src="${u.logo}" alt="${u.alt || u.name || "Partner University"}" loading="lazy" decoding="async" onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('span'),{className:'fallback',textContent:'${initials}'}))">`
       : `<span class="fallback">${initials}</span>`;
-    if (!u.name) {
-      return `
-      <a class="uni-card uni-card--logo reveal" href="#" style="transition-delay:${(i % 4) * 60}ms" aria-label="Partner University">
-        <div class="uni-card__logo">${badge}</div>
-      </a>`;
-    }
     return `
-      <a class="uni-card reveal" href="#" style="transition-delay:${(i % 4) * 60}ms">
+      <a class="uni-card uni-card--logo reveal" href="#courses" style="transition-delay:${(i % 4) * 60}ms" aria-label="${u.name || "Partner University"}">
         <div class="uni-card__logo">${badge}</div>
-        <div class="uni-card__name">${u.name}</div>
-        <span class="uni-card__loc"><i class="fa-solid fa-location-dot"></i> ${u.loc}</span>
+        ${u.name ? `<div class="uni-card__name">${u.name}</div>` : ""}
       </a>`;
   }
 
@@ -480,12 +473,12 @@
         fLevel = $("#fLevel"), fCourse = $("#fCourse");
 
   const countryUniversityMap = {
-    "United Kingdom": UNIVERSITIES.filter(u => u.loc === "UK"),
-    "United States of America": UNIVERSITIES.filter(u => u.loc === "USA"),
-    "Canada": UNIVERSITIES.filter(u => u.loc === "Canada"),
-    "Australia": UNIVERSITIES.filter(u => u.loc === "Australia"),
-    "Hungary": UNIVERSITIES.filter(u => u.loc === "Hungary"),
-    "United Arab Emirates": UNIVERSITIES.filter(u => u.loc === "UAE")
+    "United Kingdom": UNIVERSITIES.filter(u => /united kingdom|^uk$|england|scotland|wales|britain/i.test(u.loc)),
+    "United States of America": UNIVERSITIES.filter(u => /united states|^usa$/i.test(u.loc)),
+    "Canada": UNIVERSITIES.filter(u => /canada/i.test(u.loc)),
+    "Australia": UNIVERSITIES.filter(u => /australia/i.test(u.loc)),
+    "Hungary": UNIVERSITIES.filter(u => /hungary/i.test(u.loc)),
+    "United Arab Emirates": UNIVERSITIES.filter(u => /emirates|^uae$/i.test(u.loc))
   };
 
   if (fCountry) {
