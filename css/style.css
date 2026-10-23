@@ -860,8 +860,25 @@ h1 span,h2 span{
 /* ============================================================
    REVEAL ANIMATION
    ============================================================ */
-.reveal{opacity:0;transform:translateY(24px);transition:.6s cubic-bezier(.2,.7,.3,1)}
-.reveal.visible{opacity:1;transform:none}
+html{scroll-behavior:smooth}
+.reveal{
+  opacity:0;
+  transform:translate3d(0,18px,0);
+  transition:opacity .45s cubic-bezier(.25,.46,.45,.94),transform .45s cubic-bezier(.25,.46,.45,.94);
+  will-change:transform,opacity;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translate3d(0,0,0);
+  will-change:auto;
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none;will-change:auto}
+  .reveal.visible{transform:none}
+}
 
 /* ============================================================
    RESPONSIVE
