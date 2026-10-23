@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=20">
+<link rel="stylesheet" href="css/style.css?v=21">
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
@@ -61,6 +61,17 @@
             <li><a href="#destinations">Study in Australia</a></li>
             <li><a href="#destinations">Study in Hungary</a></li>
             <li><a href="#destinations">Study in UAE</a></li>
+          </ul>
+        </li>
+        <li class="nav__item--dropdown">
+          <a href="#courses" class="nav__link">Courses <i class="fa-solid fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#courses">Doctorate Courses</a></li>
+            <li><a href="#courses">Postgraduate Courses</a></li>
+            <li><a href="#courses">Pre-Master Courses</a></li>
+            <li><a href="#courses">Undergraduate Courses</a></li>
+            <li><a href="#courses">Foundation Courses</a></li>
+            <li><a href="#courses">English Language Courses</a></li>
           </ul>
         </li>
         <li><a href="#services" class="nav__link">Our Services</a></li>
@@ -296,6 +307,33 @@
   </div>
 </section>
 
+<!-- ================= COURSES ================= -->
+<section class="section courses" id="courses">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="eyebrow">Programmes</span>
+      <h2>What Course Do You Want <span>To Study?</span></h2>
+      <p>Browse popular programmes across every study level.</p>
+    </div>
+
+    <div class="tabs reveal" id="courseTabs">
+      <button class="tab is-active" data-filter="all">All</button>
+      <button class="tab" data-filter="Doctorate">Doctorate</button>
+      <button class="tab" data-filter="Postgraduate">Postgraduate</button>
+      <button class="tab" data-filter="Pre-Master">Pre-Master</button>
+      <button class="tab" data-filter="Undergraduate">Undergraduate</button>
+      <button class="tab" data-filter="Foundation">Foundation</button>
+      <button class="tab" data-filter="English Language">English Language</button>
+    </div>
+
+    <div class="course-grid" id="courseGrid"></div>
+
+    <div class="section__cta reveal">
+      <button class="btn btn--outline" id="loadMoreCourses">Browse All 691 Courses <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
 <!-- ================= SCHOLARSHIPS ================= -->
 <section class="section scholarships" id="scholarships">
   <div class="container">
@@ -333,7 +371,7 @@
 <!-- ================= CHOOSE YOUR DESTINATION ================= -->
 <section class="section destinations choose-dest" id="destinations">
   <div class="choose-banner">
-    <img src="assets/choose-banner.jpg?v=20" alt="Choose Your Destination" loading="lazy" decoding="async">
+    <img src="assets/choose-banner.jpg?v=21" alt="Choose Your Destination" loading="lazy" decoding="async">
     <div class="choose-banner__overlay">
       <span class="eyebrow">Living Abroad</span>
       <h2>Choose Your <span>Destination</span></h2>
@@ -343,7 +381,7 @@
   <div class="container">
     <div class="choose-living reveal">
       <figure class="choose-living__img">
-        <img src="assets/choose-living-abroad.jpg?v=20" alt="Living abroad" loading="lazy" decoding="async">
+        <img src="assets/choose-living-abroad.jpg?v=21" alt="Living abroad" loading="lazy" decoding="async">
       </figure>
       <div class="choose-living__body">
         <h3>Living Abroad</h3>
@@ -526,7 +564,7 @@
         <li><a href="#universities">Top Ranking Universities</a></li>
         <li><a href="#destinations">Choose Your Destination</a></li>
         <li><a href="#faq">Guide for Parents</a></li>
-        <li><a href="#destinations">Student Intakes</a></li>
+        <li><a href="#courses">Student Intakes</a></li>
         <li><a href="#services">Our Expertise</a></li>
         <li><a href="#scholarships">Cost of Studying Abroad</a></li>
       </ul>
@@ -599,6 +637,6 @@
   <img src="" alt="" id="lightboxImg">
 </div>
 
-<script src="js/main.js?v=20" defer></script>
+<script src="js/main.js?v=21" defer></script>
 </body>
 </html>
