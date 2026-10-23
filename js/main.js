@@ -439,32 +439,47 @@ const UNIVERSITIES = [
   $("#toTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
   /* ---------------------------------------------------------
+     HERO VIDEO
+  --------------------------------------------------------- */
+  const heroVideo = $(".hero__video");
+  if (heroVideo) {
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (!reduceMotion && !saveData) {
+      const started = heroVideo.play();
+      if (started && started.catch) started.catch(() => {});
+    }
+  }
+
+  /* ---------------------------------------------------------
      HERO SLIDER
   --------------------------------------------------------- */
   const slides = $$(".hero__slide");
   const dotsWrap = $("#heroDots");
   let slideIdx = 0, slideTimer;
 
-  slides.forEach((_, i) => {
-    const b = document.createElement("button");
-    if (i === 0) b.classList.add("is-active");
-    b.addEventListener("click", () => goSlide(i));
-    dotsWrap.appendChild(b);
-  });
+  if (slides.length && dotsWrap) {
+    slides.forEach((_, i) => {
+      const b = document.createElement("button");
+      if (i === 0) b.classList.add("is-active");
+      b.addEventListener("click", () => goSlide(i));
+      dotsWrap.appendChild(b);
+    });
 
-  function goSlide(i) {
-    slides[slideIdx].classList.remove("is-active");
-    dotsWrap.children[slideIdx].classList.remove("is-active");
-    slideIdx = (i + slides.length) % slides.length;
-    slides[slideIdx].classList.add("is-active");
-    dotsWrap.children[slideIdx].classList.add("is-active");
+    var goSlide = function (i) {
+      slides[slideIdx].classList.remove("is-active");
+      dotsWrap.children[slideIdx].classList.remove("is-active");
+      slideIdx = (i + slides.length) % slides.length;
+      slides[slideIdx].classList.add("is-active");
+      dotsWrap.children[slideIdx].classList.add("is-active");
+      restartSlider();
+    };
+    var restartSlider = function () {
+      clearInterval(slideTimer);
+      slideTimer = setInterval(() => goSlide(slideIdx + 1), 6500);
+    };
     restartSlider();
   }
-  function restartSlider() {
-    clearInterval(slideTimer);
-    slideTimer = setInterval(() => goSlide(slideIdx + 1), 6500);
-  }
-  restartSlider();
 
   /* ---------------------------------------------------------
      SEARCH WIDGET (dependent dropdowns)

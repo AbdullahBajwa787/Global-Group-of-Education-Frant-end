@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=16">
+<link rel="stylesheet" href="css/style.css?v=17">
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
@@ -93,91 +93,21 @@
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="home">
-  <div class="hero__slides">
-    <div class="hero__slide is-active" style="--bg:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68')">
-      <div class="container hero__content">
-        <span class="hero__eyebrow"><i class="fa-solid fa-graduation-cap"></i> Welcome and Join Us for Success</span>
-        <h1>Your Gateway to <span>Studying Abroad</span></h1>
-        <p>We provide a complete admissions service for Australia, Canada, Europe, UK, USA and other countries.</p>
-        <div class="hero__btns">
-          <a href="#enquiry" class="btn btn--accent btn--lg">Be a Student <i class="fa-solid fa-arrow-right"></i></a>
-          <a href="#contact" class="btn btn--ghost btn--lg"><i class="fa-solid fa-handshake"></i> Be a Partner</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero__slide" style="--bg:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=68')">
-      <div class="container hero__content">
-        <span class="hero__eyebrow"><i class="fa-solid fa-briefcase"></i> Flagship Programme</span>
-        <h1>MBA <span>Marketing</span></h1>
-        <p>Build a global career with industry-aligned management programmes taught at leading UK universities.</p>
-        <div class="hero__btns">
-          <a href="#courses" class="btn btn--primary btn--lg">Know More <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero__slide" style="--bg:url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1400&q=68')">
-      <div class="container hero__content">
-        <span class="hero__eyebrow"><i class="fa-solid fa-book-open"></i> Bachelor's Degrees</span>
-        <h1>Undergraduate <span>Programme</span></h1>
-        <p>Choose from 691+ certified courses with guaranteed progression pathways to top-ranked universities.</p>
-        <div class="hero__btns">
-          <a href="#courses" class="btn btn--primary btn--lg">Know More <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero__dots" id="heroDots"></div>
+  <div class="hero__media" aria-hidden="true">
+    <video class="hero__video" muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68">
+      <source src="assets/hero-video.mp4" type="video/mp4">
+    </video>
+    <span class="hero__overlay"></span>
   </div>
-
-  <!-- Search Widget -->
   <div class="container">
-    <div class="search-card reveal" id="search">
-      <div class="search-card__head">
-        <h3><i class="fa-solid fa-magnifying-glass-location"></i> Where To Study?</h3>
-        <p>Find your perfect course in 30 seconds</p>
+    <div class="hero__content">
+      <span class="hero__eyebrow"><i class="fa-solid fa-graduation-cap"></i> Welcome and Join Us for Success</span>
+      <h1>Your Gateway to <span>Studying Abroad</span></h1>
+      <p>We provide a complete admissions service for Australia, Canada, Europe, UK, USA and other countries.</p>
+      <div class="hero__btns">
+        <a href="#enquiry" class="btn btn--accent btn--lg">Be a Student <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#contact" class="btn btn--ghost btn--lg"><i class="fa-solid fa-handshake"></i> Be a Partner</a>
       </div>
-      <form class="search-card__form" id="courseSearch">
-        <div class="field">
-          <label>Select Country</label>
-          <select id="fCountry" required>
-            <option value="">Select Country</option>
-            <option>United Kingdom</option>
-            <option>United States of America</option>
-            <option>Canada</option>
-            <option>Australia</option>
-            <option>Hungary</option>
-            <option>United Arab Emirates</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Select University</label>
-          <select id="fUniversity" required>
-            <option value="">Select University</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Select Course Level</label>
-          <select id="fLevel">
-            <option value="">Select Course Level</option>
-            <option>Doctorate</option>
-            <option>Postgraduate</option>
-            <option>Pre-Master</option>
-            <option>Undergraduate</option>
-            <option>Foundation</option>
-            <option>English Language</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Select Course</label>
-          <select id="fCourse">
-            <option value="">Select Course</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn--accent search-card__btn"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-      </form>
-      <p class="search-card__result" id="searchResult"></p>
     </div>
   </div>
 </section>
@@ -679,6 +609,6 @@
   <img src="" alt="" id="lightboxImg">
 </div>
 
-<script src="js/main.js?v=16" defer></script>
+<script src="js/main.js?v=17" defer></script>
 </body>
 </html>

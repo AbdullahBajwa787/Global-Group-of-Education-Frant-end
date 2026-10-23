@@ -175,23 +175,21 @@ h1 span,h2 span{
 /* ============================================================
    HERO
    ============================================================ */
-.hero{position:relative;padding-bottom:64px;background:var(--navy)}
-.hero__slides{position:relative;height:clamp(520px,74vh,680px);overflow:hidden}
-.hero__slide{
-  position:absolute;inset:0;opacity:0;visibility:hidden;
-  transition:opacity 1s ease,visibility 1s ease;
-  will-change:opacity;transform:translateZ(0);
-  display:flex;align-items:center;
-  padding-bottom:60px;
-  background:
-    linear-gradient(105deg,rgba(12,29,60,.94) 8%,rgba(12,29,60,.72) 45%,rgba(12,29,60,.35)),
-    var(--bg) center/cover no-repeat;
+.hero{
+  position:relative;display:flex;align-items:center;
+  min-height:clamp(560px,80vh,760px);overflow:hidden;background:var(--navy);color:#fff;
 }
-.hero__slide.is-active{opacity:1;visibility:visible}
-.hero__slide.is-active .hero__content>*{animation:heroUp .9s cubic-bezier(.2,.7,.3,1) both}
-.hero__slide.is-active .hero__content>*:nth-child(2){animation-delay:.12s}
-.hero__slide.is-active .hero__content>*:nth-child(3){animation-delay:.24s}
-.hero__slide.is-active .hero__content>*:nth-child(4){animation-delay:.36s}
+.hero__media{position:absolute;inset:0;z-index:0}
+.hero__video{width:100%;height:100%;object-fit:cover;display:block}
+.hero__overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,rgba(12,29,60,.94) 6%,rgba(12,29,60,.7) 45%,rgba(12,29,60,.32));
+}
+.hero>.container{position:relative;z-index:2;width:100%;padding-block:clamp(96px,13vh,130px)}
+.hero__content>*{animation:heroUp .9s cubic-bezier(.2,.7,.3,1) both}
+.hero__content>*:nth-child(2){animation-delay:.12s}
+.hero__content>*:nth-child(3){animation-delay:.24s}
+.hero__content>*:nth-child(4){animation-delay:.36s}
 @keyframes heroUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
 
 .hero__content{color:#fff;max-width:760px;position:relative;z-index:2}
