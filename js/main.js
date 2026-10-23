@@ -434,8 +434,21 @@ const UNIVERSITIES = [
     const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const saveData = navigator.connection && navigator.connection.saveData;
     if (!reduceMotion && !saveData) {
-      const started = heroVideo.play();
-      if (started && started.catch) started.catch(() => {});
+      const startVideo = () => {
+        const p = heroVideo.play();
+        if (p && p.catch) p.catch(() => {});
+      };
+      startVideo();
+
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver((entries) => {
+          entries.forEach(e => { e.isIntersecting ? startVideo() : heroVideo.pause(); });
+        }, { threshold: 0.01 }).observe(heroVideo);
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        document.hidden ? heroVideo.pause() : startVideo();
+      });
     }
   }
 
