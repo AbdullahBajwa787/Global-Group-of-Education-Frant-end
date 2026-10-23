@@ -163,11 +163,9 @@ const UNIVERSITIES = [
   ];
 
   /* ---------------------------------------------------------
-     RENDER: UNIVERSITIES (with Load More)
+     RENDER: UNIVERSITIES (auto marquee)
   --------------------------------------------------------- */
   const uniGrid = $("#uniGrid");
-  const loadMoreUni = $("#loadMoreUni");
-  let uniShown = 24;
 
   function uniInitials(name) {
     return name.split(/\s+/)
@@ -175,13 +173,13 @@ const UNIVERSITIES = [
       .map(w => w[0]).slice(0, 3).join("").toUpperCase() || name.slice(0, 2).toUpperCase();
   }
 
-  function uniCardHTML(u, i) {
+  function uniCardHTML(u) {
     const initials = uniInitials(u.name || "University Partner");
     const badge = u.logo
       ? `<img src="${u.logo}" alt="${u.alt || u.name || "Partner University"}" loading="lazy" decoding="async" onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('span'),{className:'fallback',textContent:'${initials}'}))">`
       : `<span class="fallback">${initials}</span>`;
     return `
-      <a class="uni-card uni-card--logo reveal" href="#courses" style="transition-delay:${(i % 4) * 60}ms" aria-label="${u.name || "Partner University"}">
+      <a class="uni-card uni-card--logo" href="#contact" aria-label="${u.name || "Partner University"}">
         <div class="uni-card__logo">${badge}</div>
         ${u.name ? `<div class="uni-card__name">${u.name}</div>` : ""}
       </a>`;
@@ -189,20 +187,10 @@ const UNIVERSITIES = [
 
   function renderUnis() {
     if (!uniGrid) return;
-    uniGrid.innerHTML = UNIVERSITIES.slice(0, uniShown).map(uniCardHTML).join("");
-    if (loadMoreUni) {
-      loadMoreUni.style.display = uniShown >= UNIVERSITIES.length ? "none" : "";
-    }
-    observeReveals();
+    const set = UNIVERSITIES.map(uniCardHTML).join("");
+    uniGrid.innerHTML = set + set;
   }
   renderUnis();
-
-  if (loadMoreUni) {
-    loadMoreUni.addEventListener("click", () => {
-      uniShown += 24;
-      renderUnis();
-    });
-  }
 
   /* ---------------------------------------------------------
      RENDER: COURSES
