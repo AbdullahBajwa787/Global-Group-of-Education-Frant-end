@@ -36,12 +36,8 @@
     : null;
 
   function observeReveals() {
-    const els = $$(".reveal:not(.visible)");
-    if (!revealObserver) {
-      els.forEach(el => el.classList.add("visible"));
-      return;
-    }
-    els.forEach(el => revealObserver.observe(el));
+    const els = $$(".reveal");
+    els.forEach(el => el.classList.add("visible"));
   }
 
   /* ---------------------------------------------------------
@@ -593,6 +589,7 @@ const UNIVERSITIES = [
     return Math.max(1, Math.ceil(TESTIMONIALS.length / perView()));
   }
   function buildDots() {
+    if (!dotsBox) return;
     dotsBox.innerHTML = "";
     for (let i = 0; i < pages(); i++) {
       const b = document.createElement("button");
@@ -606,14 +603,14 @@ const UNIVERSITIES = [
     if (tIdx > max) tIdx = max;
     const pv = perView();
     const shift = Math.min(tIdx * pv, Math.max(0, TESTIMONIALS.length - pv));
-    track.style.transform = `translateX(-${(shift * 100) / pv}%)`;
-    [...dotsBox.children].forEach((d, i) => d.classList.toggle("is-active", i === tIdx));
+    if (track) track.style.transform = `translateX(-${(shift * 100) / pv}%)`;
+    if (dotsBox) [...dotsBox.children].forEach((d, i) => d.classList.toggle("is-active", i === tIdx));
   }
   const tPrev = $("#testiPrev");
   if (tPrev) tPrev.addEventListener("click", () => { tIdx = (tIdx - 1 + pages()) % pages(); updateTesti(); });
   const tNext = $("#testiNext");
   if (tNext) tNext.addEventListener("click", () => { tIdx = (tIdx + 1) % pages(); updateTesti(); });
-  buildDots();
+  if (dotsBox) buildDots();
 
   let tAuto = setInterval(() => { tIdx = (tIdx + 1) % pages(); updateTesti(); }, 5500);
   const tSlider = $("#testiSlider");
@@ -686,18 +683,21 @@ const UNIVERSITIES = [
 
   document.addEventListener("click", e => {
     const item = e.target.closest(".gal-item");
-    if (item) {
+    if (item && lbImg && lightbox) {
       lbImg.src = item.dataset.src;
       lightbox.classList.add("open");
       document.body.style.overflow = "hidden";
     }
   });
   function closeLb() {
-    lightbox.classList.remove("open");
+    if (lightbox) lightbox.classList.remove("open");
     document.body.style.overflow = "";
   }
-  $("#lightboxClose").addEventListener("click", closeLb);
-  lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLb(); });
+  const lbClose = $("#lightboxClose");
+  if (lbClose) lbClose.addEventListener("click", closeLb);
+  if (lightbox) {
+    lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLb(); });
+  }
   document.addEventListener("keydown", e => { if (e.key === "Escape") closeLb(); });
 
 })();
