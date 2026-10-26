@@ -301,8 +301,22 @@
   }
 
   /* ---------------------------------------------------------
-     ENQUIRY + SUBSCRIBE FORMS
+     STUDENT REGISTRATION + SUBSCRIBE FORMS
   --------------------------------------------------------- */
+  const studentRegForm = $("#studentRegForm");
+  if (studentRegForm) {
+    studentRegForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const note = $("#regNote");
+      if (note) {
+        note.textContent = "✓ Registration submitted successfully! Our counsellor will contact you shortly.";
+        note.classList.add("show");
+        setTimeout(() => note.classList.remove("show"), 6000);
+      }
+      e.target.reset();
+    });
+  }
+
   const enquiryForm = $("#enquiryForm");
   if (enquiryForm) {
     enquiryForm.addEventListener("submit", e => {

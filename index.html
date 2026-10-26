@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=70">
+<link rel="stylesheet" href="css/style.css?v=80">
 <style>
   /* Guaranteed instant visibility & ultra smooth scrolling */
   html {
@@ -25,7 +25,7 @@
     visibility: visible !important;
   }
   /* Ultra-smooth GPU compositing & offscreen content-visibility */
-  .header, .hero, .uni-marquee, .trust, .services, .about, .scholarships, .stats, .destinations, .faq, .testimonials, .contact, .footer {
+  .header, .hero, .uni-marquee, .trust, .services, .student-reg-section, .about, .scholarships, .stats, .destinations, .faq, .testimonials, .contact, .footer {
     contain: content;
   }
   .faq, .testimonials, .contact, .footer {
@@ -67,7 +67,7 @@
 <header class="header" id="header">
   <div class="container header__inner">
     <a href="#" class="logo">
-      <span class="logo__mark">GGE</span>
+      <img src="assets/logo.png" alt="Global Group of Education" class="logo__img" width="46" height="46">
       <span class="logo__text">
         <strong>Global Group</strong>
         <small>of Education</small>
@@ -188,88 +188,109 @@
   </div>
 </section>
 
-<!-- ================= ENQUIRY ================= -->
-<section class="section enquiry" id="enquiry">
-  <div class="container enquiry__grid">
-    <div class="enquiry__info reveal">
-      <span class="eyebrow eyebrow--light">Free Consultation</span>
-      <h2>Enquire about your <span>Study Abroad</span> Plan</h2>
-      <p>From course selection to visa approval — our certified counsellors handle every step so you can focus on your future.</p>
+<!-- ================= STUDENT REGISTRATION ================= -->
+<section class="section student-reg-section" id="enquiry">
+  <div class="container">
+    <div class="student-reg-card reveal">
+      <div class="student-reg__form-side">
+        <h2 class="student-reg__title">Student Registration</h2>
+        <form id="studentRegForm" class="student-reg__form">
+          <div class="student-reg__grid">
+            <!-- Row 1 -->
+            <div class="reg-field">
+              <input type="text" name="firstName" placeholder="First Name" required class="reg-input">
+            </div>
+            <div class="reg-field">
+              <input type="text" name="lastName" placeholder="Last Name" required class="reg-input">
+            </div>
+            <div class="reg-field reg-field--phone">
+              <span class="reg-phone-code"><span class="reg-flag">🇬🇧</span> +44 ▾</span>
+              <input type="tel" name="phone" placeholder="Mobile" required class="reg-input">
+            </div>
 
-      <ul class="checklist">
-        <li><i class="fa-solid fa-circle-check"></i> Free profile assessment &amp; career counselling</li>
-        <li><i class="fa-solid fa-circle-check"></i> University shortlisting &amp; application handling</li>
-        <li><i class="fa-solid fa-circle-check"></i> Scholarship &amp; financial aid guidance</li>
-        <li><i class="fa-solid fa-circle-check"></i> SOP, CAS &amp; visa documentation support</li>
-        <li><i class="fa-solid fa-circle-check"></i> Pre-departure briefings &amp; airport pickup</li>
-      </ul>
+            <!-- Row 2 -->
+            <div class="reg-field">
+              <input type="email" name="email" placeholder="Email" required class="reg-input">
+            </div>
+            <div class="reg-field">
+              <input type="text" name="dob" placeholder="Date Of Birth" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" class="reg-input">
+            </div>
+            <div class="reg-field">
+              <select name="nationality" required class="reg-select">
+                <option value="" disabled selected>Select Nationality</option>
+                <option>Pakistani</option>
+                <option>British</option>
+                <option>Indian</option>
+                <option>Nigerian</option>
+                <option>Bangladeshi</option>
+                <option>Other</option>
+              </select>
+            </div>
 
-      <div class="enquiry__partner">
-        <span>Global Partner</span>
-        <a href="https://www.languagecert.org/en" target="_blank" rel="noopener" class="partner-card">
-          <i class="fa-solid fa-certificate"></i>
-          <div><strong>LanguageCert</strong><small>Language Exams &amp; Certifications</small></div>
-        </a>
+            <!-- Row 3 -->
+            <div class="reg-field">
+              <select name="gender" required class="reg-select">
+                <option value="" disabled selected>Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="reg-field">
+              <select name="level" required class="reg-select">
+                <option value="" disabled selected>Select Level</option>
+                <option>Undergraduate</option>
+                <option>Postgraduate</option>
+                <option>Foundation</option>
+                <option>Pre-Master</option>
+                <option>Doctorate (PhD)</option>
+                <option>English Language</option>
+              </select>
+            </div>
+            <div class="reg-field">
+              <select name="country" required class="reg-select">
+                <option value="" disabled selected>Select Country +</option>
+                <option>United Kingdom</option>
+                <option>United States of America</option>
+                <option>Canada</option>
+                <option>Australia</option>
+                <option>Hungary</option>
+                <option>United Arab Emirates</option>
+              </select>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="reg-field">
+              <input type="text" name="intake" placeholder="Intake" class="reg-input">
+            </div>
+            <div class="reg-field">
+              <select name="course" required class="reg-select">
+                <option value="" disabled selected>Select Course</option>
+                <option>MBA / Business Management</option>
+                <option>Computer Science &amp; IT</option>
+                <option>Engineering</option>
+                <option>Nursing &amp; Healthcare</option>
+                <option>Law &amp; Social Sciences</option>
+                <option>Hospitality &amp; Tourism</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="reg-field reg-field--empty"></div>
+          </div>
+
+          <div class="student-reg__actions">
+            <button type="submit" class="student-reg__btn">Submit</button>
+            <p class="form-note" id="regNote"></p>
+          </div>
+        </form>
       </div>
-    </div>
 
-    <div class="enquiry__form-wrap reveal">
-      <form class="enquiry__form" id="enquiryForm">
-        <h3>Book a Free Consultation</h3>
-        <p>Response time under 30 minutes during working hours.</p>
-
-        <div class="field-row">
-          <div class="field">
-            <label>Select Country</label>
-            <select required>
-              <option value="">Select Country</option>
-              <option>United Kingdom</option><option>United States of America</option>
-              <option>Canada</option><option>Australia</option>
-              <option>Hungary</option><option>United Arab Emirates</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Select University</label>
-            <select required>
-              <option value="">Select University</option>
-              <option>University of Chichester</option><option>University of Sunderland</option>
-              <option>University of Bolton</option><option>Falmouth University</option>
-              <option>Queen's University Belfast</option><option>University of Surrey</option>
-              <option>Other / Not decided</option>
-            </select>
-          </div>
+      <div class="student-reg__qr-side">
+        <div class="student-reg__qr-box">
+          <img src="assets/qr-code.png" alt="Scan QR For Student Registration" width="84" height="84" class="student-reg__qr-img">
         </div>
-
-        <div class="field">
-          <label>Select Course</label>
-          <select required>
-            <option value="">Select Course</option>
-            <option>MBA Marketing</option><option>Business Management</option>
-            <option>Computer Science</option><option>Nursing &amp; Healthcare</option>
-            <option>Engineering</option><option>Hospitality &amp; Tourism</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter Your Name" required>
-          </div>
-          <div class="field">
-            <label>Phone Number</label>
-            <input type="tel" placeholder="Enter Your Phone No" required>
-          </div>
-        </div>
-
-        <div class="field">
-          <label>Email</label>
-          <input type="email" placeholder="Enter Your Email" required>
-        </div>
-
-        <button type="submit" class="btn btn--accent btn--block">Submit Enquiry <i class="fa-solid fa-paper-plane"></i></button>
-        <p class="form-note" id="enquiryNote"></p>
-      </form>
+        <h4 class="student-reg__qr-title">Scan QR For Student<br>Registration</h4>
+      </div>
     </div>
   </div>
 </section>
@@ -537,7 +558,7 @@
   <div class="container footer__grid">
     <div class="footer__brand">
       <a href="#" class="logo logo--light">
-        <span class="logo__mark">GGE</span>
+        <img src="assets/logo.png" alt="Global Group of Education" class="logo__img" width="46" height="46">
         <span class="logo__text"><strong>Global Group</strong><small>of Education</small></span>
       </a>
       <p>A trusted international education group connecting ambitious students with world-class universities since 2020.</p>
@@ -614,6 +635,6 @@
 <!-- Back to top -->
 <button class="to-top" id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
-<script src="js/main.js?v=70" defer></script>
+<script src="js/main.js?v=80" defer></script>
 </body>
 </html>
