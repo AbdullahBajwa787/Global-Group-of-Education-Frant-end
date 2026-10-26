@@ -16,7 +16,7 @@
   observeReveals();
 
   /* ---------------------------------------------------------
-     DATA: UNIVERSITIES & TESTIMONIALS & FAQS
+     DATA: UNIVERSITIES & TESTIMONIALS
   --------------------------------------------------------- */
   const UNIVERSITIES = [
     { name: "University of Chichester", alt: "University of Chichester", loc: "United Kingdom", logo: "assets/universities/logo-1.png" },

@@ -930,24 +930,6 @@ h1 span,h2 span{
 .uk-life__cols h4{color:var(--accent);font-size:1.05rem;margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .uk-life__cols p{color:#a9b8d8;font-size:.93rem;line-height:1.75}
 
-/* ============================================================
-   FAQ
-   ============================================================ */
-.faq{background:var(--bg-soft)}
-.faq-list{max-width:860px;margin:0 auto;display:grid;gap:12px}
-.faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.35s}
-.faq-item:hover{border-color:rgba(16,39,113,.3)}
-.faq-item.open{box-shadow:var(--shadow);border-color:transparent}
-.faq-item__q{
-  width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;
-  background:none;border:0;padding:20px 24px;cursor:pointer;text-align:left;
-  font-family:var(--font);font-weight:700;font-size:1rem;color:var(--navy);
-}
-.faq-item__q i{color:var(--blue-2);transition:.35s;flex-shrink:0;font-size:.85rem}
-.faq-item.open .faq-item__q i{transform:rotate(180deg);color:var(--accent)}
-.faq-item__a{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.7,.3,1)}
-.faq-item.open .faq-item__a{max-height:400px}
-.faq-item__a p{padding:0 24px 22px;color:var(--muted);font-size:.95rem;line-height:1.8}
 
 /* ============================================================
    CONTACT
@@ -1149,8 +1131,6 @@ html{scroll-behavior:smooth}
   .enquiry__form{padding:26px 20px}
   .footer__bottom-inner{flex-direction:column;text-align:center}
   .about-grid,.scholar-grid,.services-grid,.course-grid,.dest-grid,.uni-grid,.gallery__grid{grid-template-columns:1fr}
-  .faq-item__q{padding:18px 18px;font-size:.95rem}
-  .faq-item__a p{padding:0 18px 18px}
   .testi-card__inner{padding:26px 22px}
   .testi-card__foot{flex-wrap:wrap;row-gap:10px}
   .testi-card__stars{margin-left:0;width:100%}
