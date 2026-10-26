@@ -520,39 +520,53 @@ const UNIVERSITIES = [
     fUni.addEventListener("change", populateCourses);
     if (fLevel) fLevel.addEventListener("change", populateCourses);
 
-    $("#courseSearch").addEventListener("submit", e => {
-      e.preventDefault();
-      const res = $("#searchResult");
-      const bits = [fCountry.value, fUni.value, fLevel.value, fCourse.value].filter(Boolean);
-      if (!fCountry.value) {
-        res.textContent = "⚠ Please select a country to start your search.";
-      } else {
-        res.textContent = `✓ Found matches for: ${bits.join(" → ")}. A counsellor will share the full shortlist with you.`;
-      }
-      res.classList.add("show");
-    });
+    const courseSearch = $("#courseSearch");
+    if (courseSearch) {
+      courseSearch.addEventListener("submit", e => {
+        e.preventDefault();
+        const res = $("#searchResult");
+        const bits = [fCountry.value, fUni.value, fLevel.value, fCourse.value].filter(Boolean);
+        if (!res) return;
+        if (!fCountry.value) {
+          res.textContent = "⚠ Please select a country to start your search.";
+        } else {
+          res.textContent = `✓ Found matches for: ${bits.join(" → ")}. A counsellor will share the full shortlist with you.`;
+        }
+        res.classList.add("show");
+      });
+    }
   }
 
   /* ---------------------------------------------------------
      ENQUIRY + SUBSCRIBE FORMS
   --------------------------------------------------------- */
-  $("#enquiryForm").addEventListener("submit", e => {
-    e.preventDefault();
-    const note = $("#enquiryNote");
-    note.textContent = "✓ Thank you! Your enquiry has been received. Our team will contact you shortly.";
-    note.classList.add("show");
-    e.target.reset();
-    setTimeout(() => note.classList.remove("show"), 6000);
-  });
+  const enquiryForm = $("#enquiryForm");
+  if (enquiryForm) {
+    enquiryForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const note = $("#enquiryNote");
+      if (note) {
+        note.textContent = "✓ Thank you! Your enquiry has been received. Our team will contact you shortly.";
+        note.classList.add("show");
+        setTimeout(() => note.classList.remove("show"), 6000);
+      }
+      e.target.reset();
+    });
+  }
 
-  $("#subscribeForm").addEventListener("submit", e => {
-    e.preventDefault();
-    const note = $("#subscribeNote");
-    note.textContent = "✓ Subscribed successfully!";
-    note.classList.add("show");
-    e.target.reset();
-    setTimeout(() => note.classList.remove("show"), 5000);
-  });
+  const subscribeForm = $("#subscribeForm");
+  if (subscribeForm) {
+    subscribeForm.addEventListener("submit", e => {
+      e.preventDefault();
+      const note = $("#subscribeNote");
+      if (note) {
+        note.textContent = "✓ Subscribed successfully!";
+        note.classList.add("show");
+        setTimeout(() => note.classList.remove("show"), 5000);
+      }
+      e.target.reset();
+    });
+  }
 
   const contactForm = $("#contactForm");
   if (contactForm) {
@@ -595,15 +609,20 @@ const UNIVERSITIES = [
     track.style.transform = `translateX(-${(shift * 100) / pv}%)`;
     [...dotsBox.children].forEach((d, i) => d.classList.toggle("is-active", i === tIdx));
   }
-  $("#testiPrev").addEventListener("click", () => { tIdx = (tIdx - 1 + pages()) % pages(); updateTesti(); });
-  $("#testiNext").addEventListener("click", () => { tIdx = (tIdx + 1) % pages(); updateTesti(); });
+  const tPrev = $("#testiPrev");
+  if (tPrev) tPrev.addEventListener("click", () => { tIdx = (tIdx - 1 + pages()) % pages(); updateTesti(); });
+  const tNext = $("#testiNext");
+  if (tNext) tNext.addEventListener("click", () => { tIdx = (tIdx + 1) % pages(); updateTesti(); });
   buildDots();
 
   let tAuto = setInterval(() => { tIdx = (tIdx + 1) % pages(); updateTesti(); }, 5500);
-  $("#testiSlider").addEventListener("mouseenter", () => clearInterval(tAuto));
-  $("#testiSlider").addEventListener("mouseleave", () => {
-    tAuto = setInterval(() => { tIdx = (tIdx + 1) % pages(); updateTesti(); }, 5500);
-  });
+  const tSlider = $("#testiSlider");
+  if (tSlider) {
+    tSlider.addEventListener("mouseenter", () => clearInterval(tAuto));
+    tSlider.addEventListener("mouseleave", () => {
+      tAuto = setInterval(() => { tIdx = (tIdx + 1) % pages(); updateTesti(); }, 5500);
+    });
+  }
 
   let testiResizeT;
   window.addEventListener("resize", () => {

@@ -920,8 +920,8 @@ h1 span,h2 span{
    ============================================================ */
 html{scroll-behavior:smooth}
 .reveal{
-  opacity:0;
-  transform:translateY(16px);
+  opacity:1;
+  transform:none;
   transition:opacity .4s cubic-bezier(.25,.46,.45,.94),transform .4s cubic-bezier(.25,.46,.45,.94);
 }
 .reveal.visible{opacity:1;transform:none}
