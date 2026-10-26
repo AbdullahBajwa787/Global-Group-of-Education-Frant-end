@@ -29,26 +29,6 @@
     { name: "University of Strathclyde", alt: "University of Strathclyde", loc: "United Kingdom", logo: "assets/universities/logo-8.png" }
   ];
 
-  const FAQS = [
-    { q: "Is it difficult to obtain visas for overseas studies?", a: "If you have all the verifications done, all the documents sorted, filled in accurately every information asked and also have filled in other forms correctly like scholarship forms etc., then it is not hard to get the visa but all of this takes time in processing and this should be done months before the application date." },
-    { q: "What is financial aid?", a: "Students might need financial support while studying in another state. By applying for the financial aid, one can lessen the financial overload through it." },
-    { q: "What are the entry requirements to be accepted into a course?", a: "Every university has their own eligibility criteria through which they judge the application of the students. The basics include your test results, visa, qualification and grades etc." },
-    { q: "When is the right time to apply to universities?", a: "Every university has about two intakes usually which are the spring ones and the fall ones but some universities might intake students more than twice. Students should just research beforehand about the universities and their intake routine so that they don't miss the chance." },
-    { q: "How to study abroad?", a: "Studying abroad isn't an easy decision as it consumes a lot of time, energy, money, as well as it requires support from family and your own psychological support. It takes courage to go to a whole new place with different people and environment. Not all courses and programs are same in various institutes and for that, we have our excellent counsellors to guide you." },
-    { q: "Which services do we provide?", a: "We are a team which manages and guides you towards your journey with the help of our brilliant counsellors. We stick by the students from the first step till they graduate. We assist in every way possible — financial issues, scholarships, tests, residential issues etc. We provide support through counsellors just a click away, and we counsel parents as well. Through our far-spread web, we also help students get internships or jobs according to their program and profile." },
-    { q: "What are sandwich programmes?", a: "During the programme, students are allowed to work in part-time or full-time in a placement compulsory to attempt for the course. Those specific programmes are called sandwich programmes. This placement also extends the time period of the programme by a few months to one year, depending upon the course and placement months." },
-    { q: "What if I don't have the minimum entry qualification?", a: "If someone doesn't have the required qualification then they can apply for the foundation course which is for one year. If someone has the work experience but not the qualification, that student can apply for the post-graduate certificate program, claim the post-graduate degree then go for further programs." },
-    { q: "What is an application package?", a: "The documents or forms asked by the university is the application package. It usually consists of letter of recommendation, transcripts, certificates, and other essential information." },
-    { q: "What are foundation programmes?", a: "These are one year programmes especially for the students who want to connect between their qualifications. This is also done prior to applying for an international degree programme." },
-    { q: "Can a student with below average grades get admission?", a: "There is probability that you get admission in a university. Get in touch with our counsellors to guide you further in such circumstances." },
-    { q: "What are the requirements to study overseas?", a: "It's just like getting admission in any university but requires processing time and certain tests, training etc. — it differs in all institutes. Basics are the tests, your major, your scores etc. You should have your previous degree before applying for a further degree. If you already have the qualification required for the particular programme, come to us and we'll guide you accordingly." },
-    { q: "How much money do I need to show at the time of applying for Visa?", a: "There aren't any specific numerals to inform the students about. The students can show up with the least sum of money, maybe equivalent to the tuition fee. In case of ambiguity, you may also consult with our counsellors." },
-    { q: "What questions will they ask in student visa interview?", a: "It is okay to be anxious or confused when someone talks about interview. The interview panel is, most of the time, co-operative but to be properly prepared for this and for the online video interview with the UK panel, our counsellors will be here. They will guide you thoroughly." },
-    { q: "Can I work full-time or part-time while studying in UK?", a: "That mostly depends upon the course you're studying, whether it's short-term course or a long-term course. The work hours are adjusted according to your schedule. During the week-days, the student can work for less hours and then at weekends it can work for the whole day. A lot of jobs are offered on per hour and not on monthly basis." },
-    { q: "How are scholarships awarded?", a: "Majorly the scholarships and other awards are based on merit and academic evaluation. However, there are some universities who award scholarship based on an essay they ask the willing students to write on." },
-    { q: "What are the post study job prospects available abroad?", a: "It depends upon the circumstances and policy of the institute and country. Most of them allow the students to stay and look for the job according to their course major. Majority of the students get the job at the same place they did their internship or placement year during the degree." },
-    { q: "What if my visa is rejected? Do I have other options?", a: "You can always apply for the visa again after acknowledging the cause behind the rejection and correcting it this time. As every institute has their own terms and conditions, some universities refund you with your money and some might not. Also the visa fees is not refundable. But no need to worry, as our counsellors will inform you about every circumstance." }
-  ];
 
   const TESTIMONIALS = [
     { name: "Um-e-Laila", uni: "University of Strathclyde — MSc Advanced Chemical Engineering", text: "Hi, I am a lady, I can't trust anyone, but I recommend Global Group of Education. I received my CAS from Strathclyde University in MSc Advance Chemical Engineering and all admission-related services on my demand. Now I am going to uni for my study." },
@@ -83,35 +63,7 @@
     uniGrid.innerHTML = set + set;
   }
 
-  /* ---------------------------------------------------------
-     RENDER: FAQ ACCORDION
-  --------------------------------------------------------- */
-  const faqList = $("#faqList");
-  if (faqList) {
-    faqList.innerHTML = FAQS.map((f, i) => `
-      <div class="faq-item reveal">
-        <button class="faq-item__q" aria-expanded="false">
-          <span>${f.q}</span>
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
-        <div class="faq-item__a"><p>${f.a}</p></div>
-      </div>`).join("");
 
-    faqList.addEventListener("click", e => {
-      const q = e.target.closest(".faq-item__q");
-      if (!q) return;
-      const item = q.parentElement;
-      const isOpen = item.classList.contains("open");
-      faqList.querySelectorAll(".faq-item").forEach(fi => {
-        fi.classList.remove("open");
-        fi.querySelector(".faq-item__q").setAttribute("aria-expanded", "false");
-      });
-      if (!isOpen) {
-        item.classList.add("open");
-        q.setAttribute("aria-expanded", "true");
-      }
-    });
-  }
 
   /* ---------------------------------------------------------
      RENDER: TESTIMONIALS
