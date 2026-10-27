@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=100">
+<link rel="stylesheet" href="css/style.css?v=110">
 <style>
   /* Guaranteed instant visibility & ultra smooth scrolling */
   html {
@@ -472,7 +472,9 @@
 
       <div class="student-reg__qr-side">
         <div class="student-reg__qr-box">
-          <img src="assets/qr-code.png" alt="Scan QR For Student Registration" width="84" height="84" class="student-reg__qr-img">
+          <div class="student-reg__qr-inner">
+            <img src="assets/qr-code.png?v=110" alt="Scan QR For Student Registration" width="84" height="84" class="student-reg__qr-img">
+          </div>
         </div>
         <h4 class="student-reg__qr-title">Scan QR For Student<br>Registration</h4>
       </div>
@@ -481,22 +483,17 @@
 </section>
 
 <!-- ================= TESTIMONIALS ================= -->
-<section class="section testimonials">
+<section class="section testimonials" id="testimonials">
   <div class="container">
     <div class="section__head reveal">
       <span class="eyebrow">Success Stories</span>
       <h2>Alumni <span>Testimonials</span></h2>
-      <p>Real students. Real visas. Real futures.</p>
+      <p>Real students. Real visas. Real futures — hear directly from our global alumni.</p>
     </div>
+  </div>
 
-    <div class="testi-slider reveal" id="testiSlider">
-      <div class="testi-track" id="testiTrack"></div>
-      <div class="testi-nav">
-        <button class="testi-btn" id="testiPrev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
-        <div class="testi-dots" id="testiDots"></div>
-        <button class="testi-btn" id="testiNext" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
-      </div>
-    </div>
+  <div class="testi-marquee reveal" id="testiSlider">
+    <div class="testi-track" id="testiTrack"></div>
   </div>
 </section>
 
@@ -637,6 +634,6 @@
 <!-- Back to top -->
 <button class="to-top" id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
-<script src="js/main.js?v=100" defer></script>
+<script src="js/main.js?v=110" defer></script>
 </body>
 </html>
