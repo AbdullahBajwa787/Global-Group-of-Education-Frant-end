@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=134">
+<link rel="stylesheet" href="css/style.css?v=135">
 <style>
   /* Guaranteed instant visibility & ultra smooth scrolling */
   html {
@@ -353,8 +353,123 @@
 <!-- ================= STUDENT REGISTRATION ================= -->
 <section class="section student-reg-section" id="enquiry">
   <div class="container">
-    <div class="student-reg-banner-wrap reveal">
-      <img src="assets/student-registration.png" alt="Student Registration - Global Group of Education" class="student-reg-banner-img" width="1023" height="603" loading="lazy">
+    <div class="student-reg-card reveal">
+      <!-- Form Side -->
+      <div class="student-reg__form-side">
+        <h2 class="student-reg__title">Student Registration</h2>
+        <form id="studentRegForm" class="student-reg__form" novalidate>
+          <div class="student-reg__grid">
+            <!-- Row 1 -->
+            <div class="reg-field" data-required="true">
+              <input type="text" name="firstName" placeholder="First Name" required class="reg-input" id="regFirstName">
+              <span class="reg-error">This Field is Required</span>
+            </div>
+            <div class="reg-field">
+              <input type="text" name="lastName" placeholder="Last Name" class="reg-input" id="regLastName">
+              <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+            </div>
+            <div class="reg-field" data-required="true">
+              <div class="reg-phone-wrap">
+                <span class="reg-phone-code"><span class="reg-flag">🇬🇧</span> +44 ▾</span>
+                <input type="tel" name="phone" placeholder="Mobile" required class="reg-input" id="regPhone">
+              </div>
+              <span class="reg-error">This Field is Required</span>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="reg-field" data-required="true">
+              <input type="email" name="email" placeholder="Email" required class="reg-input" id="regEmail">
+              <span class="reg-error">This Field is Required</span>
+            </div>
+            <div class="reg-field">
+              <input type="text" name="dob" placeholder="Date Of Birth" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" class="reg-input" id="regDob">
+              <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+            </div>
+            <div class="reg-field" data-required="true">
+              <select name="nationality" required class="reg-select" id="regNationality">
+                <option value="" disabled selected>Select Nationality ▾</option>
+                <option value="Pakistani">Pakistani</option>
+                <option value="British">British</option>
+                <option value="Indian">Indian</option>
+                <option value="Nigerian">Nigerian</option>
+                <option value="Bangladeshi">Bangladeshi</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="reg-error">This Field is Required</span>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="reg-field">
+              <select name="gender" class="reg-select" id="regGender">
+                <option value="" disabled selected>Select Gender ▾</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+            </div>
+            <div class="reg-field" data-required="true">
+              <select name="level" required class="reg-select" id="regLevel">
+                <option value="" disabled selected>Select Level ▾</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Postgraduate">Postgraduate</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Pre-Master">Pre-Master</option>
+                <option value="Doctorate (PhD)">Doctorate (PhD)</option>
+                <option value="English Language">English Language</option>
+              </select>
+              <span class="reg-error">This Field is Required</span>
+            </div>
+            <div class="reg-field">
+              <select name="country" class="reg-select" id="regCountry">
+                <option value="" disabled selected>Select Country +</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="United States of America">United States of America</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="Hungary">Hungary</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+              </select>
+              <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="reg-field">
+              <input type="text" name="intake" placeholder="Intake" class="reg-input" id="regIntake">
+              <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+            </div>
+            <div class="reg-field" data-required="true">
+              <select name="course" required class="reg-select" id="regCourse">
+                <option value="" disabled selected>Select Course ▾</option>
+                <option value="MBA / Business Management">MBA / Business Management</option>
+                <option value="Computer Science & IT">Computer Science &amp; IT</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Nursing & Healthcare">Nursing &amp; Healthcare</option>
+                <option value="Law & Social Sciences">Law &amp; Social Sciences</option>
+                <option value="Hospitality & Tourism">Hospitality &amp; Tourism</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="reg-error">This Field is Required</span>
+            </div>
+            <div class="reg-field reg-field--empty"></div>
+          </div>
+
+          <div class="student-reg__actions">
+            <button type="submit" class="student-reg__btn" id="regSubmitBtn">Submit</button>
+            <p class="form-note" id="regNote"></p>
+          </div>
+        </form>
+      </div>
+
+      <!-- QR Side -->
+      <div class="student-reg__qr-side">
+        <a href="https://wa.me/447586589659?text=Hello%20Global%20Group%20of%20Education%2C%20I%20want%20to%20register%20as%20a%20student." target="_blank" rel="noopener" class="student-reg__qr-box" title="Click or Scan QR to register">
+          <div class="student-reg__qr-inner">
+            <img src="assets/qr-code-hd.png" alt="Scan QR For Student Registration" width="90" height="90" class="student-reg__qr-img">
+          </div>
+        </a>
+        <h4 class="student-reg__qr-title">Scan QR For Student<br>Registration</h4>
+      </div>
     </div>
   </div>
 </section>
@@ -545,6 +660,6 @@
   <span class="float-wa__tooltip">Chat with Advisor</span>
 </a>
 
-<script src="js/main.js?v=130" defer></script>
+<script src="js/main.js?v=135" defer></script>
 </body>
 </html>

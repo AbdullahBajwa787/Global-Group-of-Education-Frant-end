@@ -301,15 +301,46 @@
   --------------------------------------------------------- */
   const studentRegForm = $("#studentRegForm");
   if (studentRegForm) {
+    // Clear error on user interaction
+    studentRegForm.querySelectorAll("input, select").forEach(el => {
+      const clearError = () => {
+        const field = el.closest(".reg-field");
+        if (field && el.value.trim() !== "") {
+          field.classList.remove("has-error");
+        }
+      };
+      el.addEventListener("input", clearError);
+      el.addEventListener("change", clearError);
+    });
+
     studentRegForm.addEventListener("submit", e => {
       e.preventDefault();
+      let hasError = false;
+      let firstInvalid = null;
+
+      studentRegForm.querySelectorAll(".reg-field[data-required='true']").forEach(field => {
+        const control = field.querySelector("input, select");
+        if (!control || !control.value || control.value.trim() === "") {
+          field.classList.add("has-error");
+          hasError = true;
+          if (!firstInvalid) firstInvalid = control;
+        } else {
+          field.classList.remove("has-error");
+        }
+      });
+
+      if (hasError) {
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
       const note = $("#regNote");
       if (note) {
         note.textContent = "✓ Registration submitted successfully! Our counsellor will contact you shortly.";
         note.classList.add("show");
         setTimeout(() => note.classList.remove("show"), 6000);
       }
-      e.target.reset();
+      studentRegForm.reset();
     });
   }
 
