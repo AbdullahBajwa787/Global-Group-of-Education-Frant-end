@@ -130,9 +130,14 @@ h1 span,h2 span{
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .logo__img{
   width:48px;height:48px;object-fit:contain;border-radius:50%;display:block;flex-shrink:0;
-  background:#fff;padding:2px;box-shadow:0 4px 14px rgba(12,29,60,.12);transition:transform .3s ease;
+  background:#fff;padding:2px;border:1.5px solid rgba(251,176,25,.4);
+  box-shadow:0 4px 14px rgba(12,29,60,.12);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
 }
-.logo:hover .logo__img{transform:scale(1.05) rotate(3deg)}
+.logo:hover .logo__img{
+  transform:scale(1.06) rotate(3deg);
+  border-color:var(--accent);
+  box-shadow:0 6px 18px rgba(251,176,25,.3);
+}
 .logo__mark{
   width:48px;height:48px;display:grid;place-items:center;border-radius:14px;
   background:linear-gradient(135deg,var(--blue),var(--navy-2));color:#fff;
@@ -518,8 +523,13 @@ h1 span,h2 span{
   padding:5px;
   display:grid;
   place-items:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.35);
+  box-shadow:0 8px 24px rgba(0,0,0,.35), 0 0 16px rgba(255,255,255,.2);
   border:2.5px solid rgba(255,255,255,.85);
+  transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s ease;
+}
+.student-reg__qr-box:hover{
+  transform:scale(1.08);
+  box-shadow:0 12px 28px rgba(0,0,0,.45), 0 0 24px rgba(251,176,25,.55);
 }
 .student-reg__qr-img{
   width:100%;
