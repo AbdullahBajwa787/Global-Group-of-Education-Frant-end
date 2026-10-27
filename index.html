@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=133">
+<link rel="stylesheet" href="css/style.css?v=134">
 <style>
   /* Guaranteed instant visibility & ultra smooth scrolling */
   html {
@@ -353,109 +353,8 @@
 <!-- ================= STUDENT REGISTRATION ================= -->
 <section class="section student-reg-section" id="enquiry">
   <div class="container">
-    <div class="student-reg-card reveal">
-      <div class="student-reg__form-side">
-        <h2 class="student-reg__title">Student Registration</h2>
-        <form id="studentRegForm" class="student-reg__form">
-          <div class="student-reg__grid">
-            <!-- Row 1 -->
-            <div class="reg-field">
-              <input type="text" name="firstName" placeholder="First Name" required class="reg-input">
-            </div>
-            <div class="reg-field">
-              <input type="text" name="lastName" placeholder="Last Name" required class="reg-input">
-            </div>
-            <div class="reg-field reg-field--phone">
-              <span class="reg-phone-code"><span class="reg-flag">🇬🇧</span> +44 ▾</span>
-              <input type="tel" name="phone" placeholder="Mobile" required class="reg-input">
-            </div>
-
-            <!-- Row 2 -->
-            <div class="reg-field">
-              <input type="email" name="email" placeholder="Email" required class="reg-input">
-            </div>
-            <div class="reg-field">
-              <input type="text" name="dob" placeholder="Date Of Birth" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'" class="reg-input">
-            </div>
-            <div class="reg-field">
-              <select name="nationality" required class="reg-select">
-                <option value="" disabled selected>Select Nationality</option>
-                <option>Pakistani</option>
-                <option>British</option>
-                <option>Indian</option>
-                <option>Nigerian</option>
-                <option>Bangladeshi</option>
-                <option>Other</option>
-              </select>
-            </div>
-
-            <!-- Row 3 -->
-            <div class="reg-field">
-              <select name="gender" required class="reg-select">
-                <option value="" disabled selected>Select Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="reg-field">
-              <select name="level" required class="reg-select">
-                <option value="" disabled selected>Select Level</option>
-                <option>Undergraduate</option>
-                <option>Postgraduate</option>
-                <option>Foundation</option>
-                <option>Pre-Master</option>
-                <option>Doctorate (PhD)</option>
-                <option>English Language</option>
-              </select>
-            </div>
-            <div class="reg-field">
-              <select name="country" required class="reg-select">
-                <option value="" disabled selected>Select Country +</option>
-                <option>United Kingdom</option>
-                <option>United States of America</option>
-                <option>Canada</option>
-                <option>Australia</option>
-                <option>Hungary</option>
-                <option>United Arab Emirates</option>
-              </select>
-            </div>
-
-            <!-- Row 4 -->
-            <div class="reg-field">
-              <input type="text" name="intake" placeholder="Intake" class="reg-input">
-            </div>
-            <div class="reg-field">
-              <select name="course" required class="reg-select">
-                <option value="" disabled selected>Select Course</option>
-                <option>MBA / Business Management</option>
-                <option>Computer Science &amp; IT</option>
-                <option>Engineering</option>
-                <option>Nursing &amp; Healthcare</option>
-                <option>Law &amp; Social Sciences</option>
-                <option>Hospitality &amp; Tourism</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="reg-field reg-field--empty"></div>
-          </div>
-
-          <div class="student-reg__actions">
-            <button type="submit" class="student-reg__btn">Submit</button>
-            <p class="form-note" id="regNote"></p>
-          </div>
-        </form>
-      </div>
-
-      <div class="student-reg__qr-side">
-        <div class="student-reg__qr-box">
-          <div class="student-reg__qr-inner">
-            <img src="assets/qr-code.png?v=120" alt="Scan QR For Student Registration" width="84" height="84" class="student-reg__qr-img">
-          </div>
-        </div>
-        <h4 class="student-reg__qr-title">Scan QR For Student<br>Registration</h4>
-        <span class="student-reg__qr-subtitle"><i class="fa-solid fa-mobile-screen"></i> Instant Mobile Application</span>
-      </div>
+    <div class="student-reg-banner-wrap reveal">
+      <img src="assets/student-registration.png" alt="Student Registration - Global Group of Education" class="student-reg-banner-img" width="1023" height="603" loading="lazy">
     </div>
   </div>
 </section>
@@ -501,15 +400,54 @@
       </div>
 
       <form class="contact__form reveal" id="contactForm">
-        <h3>Send Us a Message</h3>
-        <div class="field-row">
-          <div class="field"><label>Full Name</label><input type="text" placeholder="Enter Your Name" required></div>
-          <div class="field"><label>Phone Number</label><input type="tel" placeholder="Enter Your Phone No" required></div>
+        <div class="contact__form-head">
+          <span class="contact__form-badge"><i class="fa-solid fa-envelope-open-text"></i> Quick Inquiry</span>
+          <h3>Send Us a Message</h3>
+          <p>Drop us a line and our education advisors will get back to you promptly.</p>
         </div>
-        <div class="field"><label>Email</label><input type="email" placeholder="Enter Your Email" required></div>
-        <div class="field"><label>Subject</label><input type="text" placeholder="Subject" required></div>
-        <div class="field"><label>Message</label><textarea rows="4" placeholder="Write your message..." required style="border:1.5px solid var(--line);border-radius:12px;padding:14px 15px;font-family:inherit;font-weight:600;font-size:.94rem;resize:vertical"></textarea></div>
-        <button type="submit" class="btn btn--primary btn--block">Submit <i class="fa-solid fa-paper-plane"></i></button>
+        <div class="field-row">
+          <div class="field">
+            <label for="cName">Full Name</label>
+            <div class="field__wrap">
+              <i class="fa-regular fa-user"></i>
+              <input type="text" id="cName" placeholder="Enter Your Name" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cPhone">Phone Number</label>
+            <div class="field__wrap">
+              <i class="fa-solid fa-phone"></i>
+              <input type="tel" id="cPhone" placeholder="Enter Your Phone No" required>
+            </div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="cEmail">Email Address</label>
+            <div class="field__wrap">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="cEmail" placeholder="Enter Your Email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cSubject">Subject</label>
+            <div class="field__wrap">
+              <i class="fa-solid fa-tag"></i>
+              <input type="text" id="cSubject" placeholder="Inquiry Subject" required>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cMsg">Message</label>
+          <div class="field__wrap field__wrap--textarea">
+            <i class="fa-regular fa-comment-dots"></i>
+            <textarea id="cMsg" rows="4" placeholder="Write your message here..." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block contact__submit-btn">
+          <span>Submit</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
         <p class="form-note" id="contactNote"></p>
       </form>
     </div>
@@ -584,19 +522,7 @@
       </ul>
     </div>
 
-    <div class="footer__col footer__subscribe">
-      <h4>Subscribe With Us</h4>
-      <p>Get intakes, scholarships &amp; deadlines in your inbox.</p>
-      <form class="subscribe" id="subscribeForm">
-        <input type="email" placeholder="Enter your email address" required>
-        <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
-      </form>
-      <p class="form-note" id="subscribeNote"></p>
-      <div class="footer__contact">
-        <a href="https://wa.me/447586589659" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> +44 7586589659</a>
-        <a href="mailto:london@globalgroupofeducation.com"><i class="fa-regular fa-envelope"></i> london@globalgroupofeducation.com</a>
-      </div>
-    </div>
+
   </div>
 
   <div class="footer__bottom">
