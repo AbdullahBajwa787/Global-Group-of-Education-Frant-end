@@ -235,28 +235,141 @@
   }
 
   /* ---------------------------------------------------------
-     HERO VIDEO PERFORMANCE (Pause when off-screen)
+     HERO VIDEO SLIDER (Multi-Video Background)
   --------------------------------------------------------- */
-  const heroVideo = $(".hero__video");
-  if (heroVideo) {
-    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!reduceMotion) {
-      const startVideo = () => {
-        const p = heroVideo.play();
+  const heroSlider = $("#heroSlider");
+  if (heroSlider) {
+    const slides = $$(".hero__slide", heroSlider);
+    const dots = $$(".hero__dot");
+    const prevBtn = $("#heroPrevBtn");
+    const nextBtn = $("#heroNextBtn");
+    let currentIndex = 0;
+    let autoTimer = null;
+    let isIntersecting = true;
+    const SLIDE_DURATION = 7500; // 7.5 seconds per video slide
+
+    function playActiveVideo() {
+      const activeSlide = slides[currentIndex];
+      if (!activeSlide) return;
+      const vid = activeSlide.querySelector("video");
+      if (vid && isIntersecting && !document.hidden) {
+        const p = vid.play();
         if (p && p.catch) p.catch(() => {});
-      };
-      startVideo();
-
-      if ("IntersectionObserver" in window) {
-        new IntersectionObserver((entries) => {
-          entries.forEach(e => { e.isIntersecting ? startVideo() : heroVideo.pause(); });
-        }, { threshold: 0.01 }).observe(heroVideo);
       }
+    }
 
-      document.addEventListener("visibilitychange", () => {
-        document.hidden ? heroVideo.pause() : startVideo();
+    function pauseAllVideos() {
+      slides.forEach(slide => {
+        const v = slide.querySelector("video");
+        if (v && !v.paused) v.pause();
       });
     }
+
+    function goToSlide(targetIdx) {
+      if (slides.length <= 1) return;
+      const cleanIdx = ((targetIdx % slides.length) + slides.length) % slides.length;
+      if (cleanIdx === currentIndex && slides[currentIndex].classList.contains("is-active")) {
+        return;
+      }
+
+      const prevSlide = slides[currentIndex];
+      const nextSlide = slides[cleanIdx];
+
+      // Pause old video
+      const oldVid = prevSlide.querySelector("video");
+      if (oldVid) oldVid.pause();
+
+      prevSlide.classList.remove("is-active");
+      nextSlide.classList.add("is-active");
+
+      // Play new video
+      const newVid = nextSlide.querySelector("video");
+      if (newVid) {
+        newVid.currentTime = 0;
+        if (isIntersecting && !document.hidden) {
+          const p = newVid.play();
+          if (p && p.catch) p.catch(() => {});
+        }
+      }
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === cleanIdx);
+      });
+
+      currentIndex = cleanIdx;
+    }
+
+    function nextSlide() {
+      goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentIndex - 1);
+    }
+
+    function startTimer() {
+      stopTimer();
+      autoTimer = setInterval(nextSlide, SLIDE_DURATION);
+    }
+
+    function stopTimer() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    // Controls
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        startTimer();
+      });
+    }
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        startTimer();
+      });
+    }
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener("click", () => {
+        goToSlide(idx);
+        startTimer();
+      });
+    });
+
+    // Start first video
+    playActiveVideo();
+    startTimer();
+
+    // IntersectionObserver & Visibility handling
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          isIntersecting = e.isIntersecting;
+          if (isIntersecting) {
+            playActiveVideo();
+            startTimer();
+          } else {
+            pauseAllVideos();
+            stopTimer();
+          }
+        });
+      }, { threshold: 0.05 }).observe(heroSlider);
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        pauseAllVideos();
+        stopTimer();
+      } else if (isIntersecting) {
+        playActiveVideo();
+        startTimer();
+      }
+    });
   }
 
 
@@ -301,16 +414,30 @@
   --------------------------------------------------------- */
   const studentRegForm = $("#studentRegForm");
   if (studentRegForm) {
-    // Clear error on user interaction
-    studentRegForm.querySelectorAll("input, select").forEach(el => {
-      const clearError = () => {
-        const field = el.closest(".reg-field");
-        if (field && el.value.trim() !== "") {
-          field.classList.remove("has-error");
-        }
-      };
-      el.addEventListener("input", clearError);
-      el.addEventListener("change", clearError);
+    const updateFieldState = (el) => {
+      const field = el.closest(".reg-field");
+      if (!field) return;
+      const val = el.value ? el.value.trim() : "";
+      if (val !== "") {
+        field.classList.add("is-filled");
+        field.classList.remove("has-error");
+      } else {
+        field.classList.remove("is-filled");
+      }
+    };
+
+    // Live listening on all inputs and selects
+    const controls = studentRegForm.querySelectorAll("input, select");
+    controls.forEach(el => {
+      el.addEventListener("input", () => updateFieldState(el));
+      el.addEventListener("change", () => updateFieldState(el));
+      el.addEventListener("keyup", () => updateFieldState(el));
+      el.addEventListener("blur", () => updateFieldState(el));
+
+      // Initial check for prefilled / restored values
+      if (el.value && el.value.trim() !== "") {
+        updateFieldState(el);
+      }
     });
 
     studentRegForm.addEventListener("submit", e => {
@@ -320,12 +447,15 @@
 
       studentRegForm.querySelectorAll(".reg-field[data-required='true']").forEach(field => {
         const control = field.querySelector("input, select");
-        if (!control || !control.value || control.value.trim() === "") {
+        const val = control && control.value ? control.value.trim() : "";
+        if (!control || val === "") {
           field.classList.add("has-error");
+          field.classList.remove("is-filled");
           hasError = true;
           if (!firstInvalid) firstInvalid = control;
         } else {
           field.classList.remove("has-error");
+          field.classList.add("is-filled");
         }
       });
 
@@ -341,6 +471,10 @@
         setTimeout(() => note.classList.remove("show"), 6000);
       }
       studentRegForm.reset();
+      studentRegForm.querySelectorAll(".reg-field").forEach(f => {
+        f.classList.remove("has-error");
+        f.classList.remove("is-filled");
+      });
     });
   }
 

@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=135">
+<link rel="stylesheet" href="css/style.css?v=136">
 <style>
   /* Guaranteed instant visibility & ultra smooth scrolling */
   html {
@@ -108,9 +108,23 @@
 <!-- ================= HERO ================= -->
 <section class="hero" id="home">
   <div class="hero__media" aria-hidden="true">
-    <video class="hero__video" muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68">
-      <source src="assets/hero-video.mp4" type="video/mp4">
-    </video>
+    <div class="hero__slider" id="heroSlider">
+      <div class="hero__slide is-active" data-index="0">
+        <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68">
+          <source src="assets/hero-video.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero__slide" data-index="1">
+        <video class="hero__video" muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=68">
+          <source src="assets/hero-video-2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero__slide" data-index="2">
+        <video class="hero__video" muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=68">
+          <source src="assets/hero-video-3.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
     <span class="hero__overlay"></span>
   </div>
   <div class="container">
@@ -130,6 +144,21 @@
         <div class="hero__stat-pill"><strong>£0</strong><span>Consultation Fee</span></div>
       </div>
     </div>
+  </div>
+
+  <!-- Hero Slider Controls -->
+  <div class="hero__controls">
+    <button class="hero__ctrl-btn hero__ctrl-btn--prev" id="heroPrevBtn" aria-label="Previous video">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <div class="hero__dots" id="heroDots">
+      <button class="hero__dot is-active" data-slide="0" aria-label="Slide 1: Campus Life"></button>
+      <button class="hero__dot" data-slide="1" aria-label="Slide 2: Global Travel"></button>
+      <button class="hero__dot" data-slide="2" aria-label="Slide 3: Arrival & Destination"></button>
+    </div>
+    <button class="hero__ctrl-btn hero__ctrl-btn--next" id="heroNextBtn" aria-label="Next video">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
   </div>
 </section>
 
@@ -660,6 +689,6 @@
   <span class="float-wa__tooltip">Chat with Advisor</span>
 </a>
 
-<script src="js/main.js?v=135" defer></script>
+<script src="js/main.js?v=136" defer></script>
 </body>
 </html>
