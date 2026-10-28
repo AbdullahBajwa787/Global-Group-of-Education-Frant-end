@@ -289,14 +289,13 @@
     const nextBtn = $("#heroNextBtn");
     let currentIndex = 0;
     let autoTimer = null;
-    let isIntersecting = true;
     const SLIDE_DURATION = 7500; // 7.5 seconds per video slide
 
     function playActiveVideo() {
       const activeSlide = slides[currentIndex];
       if (!activeSlide) return;
       const vid = activeSlide.querySelector("video");
-      if (vid && isIntersecting && !document.hidden) {
+      if (vid && !document.hidden) {
         const p = vid.play();
         if (p && p.catch) p.catch(() => {});
       }
@@ -345,7 +344,7 @@
         if (newVid.readyState >= 2) {
           try { newVid.currentTime = 0; } catch(_) {}
         }
-        if (isIntersecting && !document.hidden) {
+        if (!document.hidden) {
           const p = newVid.play();
           if (p && p.catch) p.catch(() => {});
         }
@@ -407,27 +406,12 @@
     playActiveVideo();
     startTimer();
 
-    // IntersectionObserver & Visibility handling
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          isIntersecting = e.isIntersecting;
-          if (isIntersecting) {
-            playActiveVideo();
-            startTimer();
-          } else {
-            pauseAllVideos();
-            stopTimer();
-          }
-        });
-      }, { threshold: 0.05 }).observe(heroSlider);
-    }
-
+    // Pause when tab is hidden, resume when tab is visible
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         pauseAllVideos();
         stopTimer();
-      } else if (isIntersecting) {
+      } else {
         playActiveVideo();
         startTimer();
       }
