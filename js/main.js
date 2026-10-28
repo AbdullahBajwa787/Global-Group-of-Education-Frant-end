@@ -265,6 +265,15 @@
       });
     }
 
+    function preloadNextSlide() {
+      const nextIdx = (currentIndex + 1) % slides.length;
+      const nextVid = slides[nextIdx]?.querySelector("video");
+      if (nextVid && nextVid.preload === "none") {
+        nextVid.preload = "auto";
+        nextVid.load();
+      }
+    }
+
     function goToSlide(targetIdx) {
       if (slides.length <= 1) return;
       const cleanIdx = ((targetIdx % slides.length) + slides.length) % slides.length;
@@ -282,10 +291,16 @@
       prevSlide.classList.remove("is-active");
       nextSlide.classList.add("is-active");
 
-      // Play new video
+      // Play new video smoothly
       const newVid = nextSlide.querySelector("video");
       if (newVid) {
-        newVid.currentTime = 0;
+        if (newVid.preload === "none") {
+          newVid.preload = "auto";
+          newVid.load();
+        }
+        if (newVid.readyState >= 2) {
+          try { newVid.currentTime = 0; } catch(_) {}
+        }
         if (isIntersecting && !document.hidden) {
           const p = newVid.play();
           if (p && p.catch) p.catch(() => {});
@@ -298,6 +313,9 @@
       });
 
       currentIndex = cleanIdx;
+
+      // Warm up subsequent slide video ahead of time
+      setTimeout(preloadNextSlide, 3500);
     }
 
     function nextSlide() {

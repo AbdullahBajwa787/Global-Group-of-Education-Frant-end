@@ -204,14 +204,27 @@ h1 span,h2 span{
   position:relative;display:flex;align-items:center;
   min-height:clamp(580px,82vh,780px);overflow:hidden;background:var(--navy);color:#fff;
 }
-.hero__media{position:absolute;inset:0;z-index:0}
-.hero__slider{position:absolute;inset:0;width:100%;height:100%}
+.hero__media{
+  position:absolute;inset:0;z-index:0;
+  contain:paint layout;
+  transform:translate3d(0,0,0);
+  -webkit-transform:translate3d(0,0,0);
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  overflow:hidden;
+  background:#08142b;
+}
+.hero__slider{position:absolute;inset:0;width:100%;height:100%;contain:paint layout}
 .hero__slide{
   position:absolute;inset:0;width:100%;height:100%;
   opacity:0;
   visibility:hidden;
-  transition:opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+  transition:opacity 0.6s ease, visibility 0.6s;
   pointer-events:none;
+  transform:translate3d(0,0,0);
+  -webkit-transform:translate3d(0,0,0);
+  backface-visibility:hidden;
+  contain:paint layout;
 }
 .hero__slide.is-active{
   opacity:1;
@@ -219,14 +232,20 @@ h1 span,h2 span{
   pointer-events:auto;
   z-index:1;
 }
-.hero__video{width:100%;height:100%;object-fit:cover;display:block}
+.hero__video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transform:translate3d(0,0,0);
+  -webkit-transform:translate3d(0,0,0);
+  backface-visibility:hidden;
+  image-rendering:-webkit-optimize-contrast;
+}
 .hero__overlay{
   position:absolute;inset:0;
-  background:linear-gradient(110deg,rgba(11,26,55,.92) 0%,rgba(16,39,113,.76) 50%,rgba(11,26,55,.45) 100%);
+  background:linear-gradient(110deg,rgba(11,26,55,.90) 0%,rgba(16,39,113,.74) 50%,rgba(11,26,55,.42) 100%);
   z-index:2;
 }
 
-/* Hero Video Slider Controls */
+/* Hero Video Slider Controls (Hardware Accelerated, Ultra-Smooth) */
 .hero__controls{
   position:absolute;
   bottom:32px;
@@ -235,13 +254,15 @@ h1 span,h2 span{
   display:inline-flex;
   align-items:center;
   gap:10px;
-  background:rgba(11,26,55,.65);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  background:#0c1f44;
+  background:rgba(12,31,68,.92);
   padding:6px 14px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.2);
+  border:1px solid rgba(255,255,255,.22);
   box-shadow:0 8px 24px rgba(0,0,0,.35);
+  transform:translate3d(0,0,0);
+  -webkit-transform:translate3d(0,0,0);
+  backface-visibility:hidden;
 }
 .hero__ctrl-btn{
   width:32px;
@@ -308,10 +329,10 @@ h1 span,h2 span{
 .hero__eyebrow{
   display:inline-flex;align-items:center;gap:10px;font-family:var(--font);font-weight:700;
   font-size:.82rem;letter-spacing:.04em;text-transform:none;color:#ffffff;
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  background:#0c1f44;background:rgba(12,31,68,.88);border:1px solid rgba(255,255,255,.25);
   padding:8px 18px;border-radius:999px;
-  box-shadow:0 6px 18px rgba(0,0,0,.15);
+  box-shadow:0 6px 18px rgba(0,0,0,.25);
+  transform:translate3d(0,0,0);
 }
 .hero__pulse-dot{
   width:8px;height:8px;border-radius:50%;background:#10b981;
@@ -334,10 +355,10 @@ h1 span,h2 span{
   display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;
 }
 .hero__stat-pill{
-  background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  background:#0c1f44;background:rgba(12,31,68,.85);border:1px solid rgba(255,255,255,.2);
   padding:10px 18px;border-radius:12px;display:flex;align-items:center;gap:10px;
-  box-shadow:0 4px 14px rgba(0,0,0,.12);
+  box-shadow:0 4px 14px rgba(0,0,0,.2);
+  transform:translate3d(0,0,0);
 }
 .hero__stat-pill strong{color:var(--accent);font-size:1.15rem;font-family:var(--font);font-weight:800}
 .hero__stat-pill span{color:#e2e8f0;font-size:.84rem;font-weight:600}
@@ -372,12 +393,19 @@ h1 span,h2 span{
 .universities{background:#fff;overflow:hidden}
 .uni-marquee{
   position:relative;overflow:hidden;padding:10px 0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
 }
+.uni-marquee::before,
+.uni-marquee::after{
+  content:"";position:absolute;top:0;bottom:0;width:70px;z-index:3;pointer-events:none;
+}
+.uni-marquee::before{left:0;background:linear-gradient(90deg,#ffffff 0%,transparent 100%)}
+.uni-marquee::after{right:0;background:linear-gradient(270deg,#ffffff 0%,transparent 100%)}
 .uni-track{
   display:flex;align-items:stretch;width:max-content;
-  animation:uniScroll 38s linear infinite;will-change:transform;
+  animation:uniScroll 38s linear infinite;
+  transform:translate3d(0,0,0);
+  -webkit-transform:translate3d(0,0,0);
+  contain:layout paint;
 }
 .uni-marquee:hover .uni-track{animation-play-state:paused}
 @keyframes uniScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -827,16 +855,21 @@ h1 span,h2 span{
   position:relative;
   padding:22px 0 30px;
   margin-top:clamp(28px,4vw,44px);
-  mask-image:linear-gradient(to right,transparent 0%,black 6%,black 94%,transparent 100%);
-  -webkit-mask-image:linear-gradient(to right,transparent 0%,black 6%,black 94%,transparent 100%);
 }
+.testi-marquee::before,
+.testi-marquee::after{
+  content:"";position:absolute;top:0;bottom:0;width:80px;z-index:3;pointer-events:none;
+}
+.testi-marquee::before{left:0;background:linear-gradient(90deg,#ffffff 0%,transparent 100%)}
+.testi-marquee::after{right:0;background:linear-gradient(270deg,#ffffff 0%,transparent 100%)}
 .testi-track{
   display:flex;
   gap:26px;
   width:max-content;
   animation:testiScroll 45s linear infinite;
-  will-change:transform;
   transform:translate3d(0,0,0);
+  -webkit-transform:translate3d(0,0,0);
+  contain:layout paint;
 }
 .testi-marquee:hover .testi-track{
   animation-play-state:paused;
@@ -1457,15 +1490,18 @@ h1 span,h2 span{
 
 
 /* ============================================================
-   REVEAL ANIMATION
+   REVEAL ANIMATION (Instant Solid 240Hz Rendering)
    ============================================================ */
 html{scroll-behavior:smooth}
 .reveal{
-  opacity:1;
-  transform:none;
-  transition:opacity .4s cubic-bezier(.25,.46,.45,.94),transform .4s cubic-bezier(.25,.46,.45,.94);
+  opacity:1 !important;
+  transform:none !important;
+  transition:none !important;
 }
-.reveal.visible{opacity:1;transform:none}
+.reveal.visible{
+  opacity:1 !important;
+  transform:none !important;
+}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   .reveal{opacity:1;transform:none;transition:none;will-change:auto}
