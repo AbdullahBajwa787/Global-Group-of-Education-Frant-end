@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preload" as="image" href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68" fetchpriority="high">
-<link rel="stylesheet" href="css/style.css?v=137">
+<link rel="stylesheet" href="css/style.css?v=138">
 <style>
   /* Guaranteed instant visibility & ultra smooth scrolling */
   html {
@@ -66,7 +66,7 @@
 <!-- ================= HEADER ================= -->
 <header class="header" id="header">
   <div class="container header__inner">
-    <a href="#" class="logo">
+    <a href="#home" class="logo">
       <img src="assets/logo.png" alt="Global Group of Education" class="logo__img" width="46" height="46">
       <span class="logo__text">
         <strong>Global Group</strong>
@@ -74,31 +74,81 @@
       </span>
     </a>
 
-    <nav class="nav" id="nav">
+    <!-- Nav Backdrop Overlay (Mobile) -->
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+    <nav class="nav" id="nav" aria-label="Main Navigation">
+      <!-- Mobile Drawer Head -->
+      <div class="nav__drawer-head">
+        <a href="#home" class="logo">
+          <img src="assets/logo.png" alt="Global Group of Education" class="logo__img" width="40" height="40">
+          <span class="logo__text">
+            <strong>Global Group</strong>
+            <small>of Education</small>
+          </span>
+        </a>
+        <button class="nav__close-btn" id="navCloseBtn" aria-label="Close navigation menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
       <ul class="nav__list">
-        <li><a href="#home" class="nav__link active">Home</a></li>
+        <li>
+          <a href="#home" class="nav__link active">
+            <span class="nav__link-content"><i class="fa-solid fa-house nav__link-icon"></i> <span>Home</span></span>
+          </a>
+        </li>
         <li class="nav__item--dropdown">
-          <a href="#destinations" class="nav__link">Study Destinations <i class="fa-solid fa-chevron-down"></i></a>
-          <ul class="dropdown">
-            <li><a href="#destinations">Study in United Kingdom</a></li>
-            <li><a href="#destinations">Study in United States</a></li>
-            <li><a href="#destinations">Study in Canada</a></li>
-            <li><a href="#destinations">Study in Australia</a></li>
-            <li><a href="#destinations">Study in Hungary</a></li>
-            <li><a href="#destinations">Study in UAE</a></li>
+          <a href="#destinations" class="nav__link nav__dropdown-trigger" id="destDropdownTrigger" aria-expanded="false">
+            <span class="nav__link-content"><i class="fa-solid fa-earth-americas nav__link-icon"></i> <span>Study Destinations</span></span>
+            <i class="fa-solid fa-chevron-down nav__dropdown-arrow"></i>
+          </a>
+          <ul class="dropdown" id="destDropdownMenu">
+            <li><a href="#destinations" class="dropdown__link"><span class="dest-flag">🇬🇧</span> <span>Study in United Kingdom</span></a></li>
+            <li><a href="#destinations" class="dropdown__link"><span class="dest-flag">🇺🇸</span> <span>Study in United States</span></a></li>
+            <li><a href="#destinations" class="dropdown__link"><span class="dest-flag">🇨🇦</span> <span>Study in Canada</span></a></li>
+            <li><a href="#destinations" class="dropdown__link"><span class="dest-flag">🇦🇺</span> <span>Study in Australia</span></a></li>
+            <li><a href="#destinations" class="dropdown__link"><span class="dest-flag">🇭🇺</span> <span>Study in Hungary</span></a></li>
+            <li><a href="#destinations" class="dropdown__link"><span class="dest-flag">🇦🇪</span> <span>Study in UAE</span></a></li>
           </ul>
         </li>
-        <li><a href="#services" class="nav__link">Our Services</a></li>
-        <li><a href="#about" class="nav__link">About Us</a></li>
-        <li><a href="#contact" class="nav__link">Contact Us</a></li>
+        <li>
+          <a href="#services" class="nav__link">
+            <span class="nav__link-content"><i class="fa-solid fa-briefcase nav__link-icon"></i> <span>Our Services</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="#about" class="nav__link">
+            <span class="nav__link-content"><i class="fa-solid fa-building-columns nav__link-icon"></i> <span>About Us</span></span>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="nav__link">
+            <span class="nav__link-content"><i class="fa-solid fa-phone nav__link-icon"></i> <span>Contact Us</span></span>
+          </a>
+        </li>
       </ul>
+
+      <!-- Mobile Drawer Footer Actions -->
+      <div class="nav__drawer-footer">
+        <a href="#enquiry" class="btn btn--accent btn--block nav__drawer-cta">
+          <i class="fa-solid fa-graduation-cap"></i> Student Registration
+        </a>
+        <a href="https://wa.me/447586589659?text=Hello%20Global%20Group%20of%20Education%2C%20I%20want%20to%20inquire%20about%20admissions." class="btn btn--ghost btn--block nav__drawer-wa" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+        <div class="nav__drawer-meta">
+          <span><i class="fa-solid fa-location-dot"></i> London &bull; Sahiwal</span>
+          <span><i class="fa-solid fa-award"></i> British Council Certified</span>
+        </div>
+      </div>
     </nav>
 
     <div class="header__actions">
       <a href="https://wa.me/447586589659?text=I'm%20interested" class="btn btn--primary header__cta" target="_blank" rel="noopener">
         <i class="fa-brands fa-whatsapp"></i> +44 7586589659
       </a>
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="nav" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -689,6 +739,6 @@
   <span class="float-wa__tooltip">Chat with Advisor</span>
 </a>
 
-<script src="js/main.js?v=137" defer></script>
+<script src="js/main.js?v=138" defer></script>
 </body>
 </html>

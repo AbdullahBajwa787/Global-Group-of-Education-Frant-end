@@ -132,6 +132,9 @@
   const header = $("#header");
   const hamburger = $("#hamburger");
   const nav = $("#nav");
+  const navCloseBtn = $("#navCloseBtn");
+  const navOverlay = $("#navOverlay");
+  const destDropdownTrigger = $("#destDropdownTrigger");
   const toTopBtn = $("#toTop");
   const sections = $$("section[id]");
   const navLinks = $$(".nav__link");
@@ -191,43 +194,84 @@
     }, { passive: true });
   }
 
-  if (hamburger && nav) {
-    hamburger.addEventListener("click", () => {
-      hamburger.classList.toggle("is-active");
-      nav.classList.toggle("open");
-      document.body.style.overflow = nav.classList.contains("open") ? "hidden" : "";
+  /* ---------------------------------------------------------
+     MOBILE DRAWER CONTROLLER (Instant 60/120/240Hz Response)
+  --------------------------------------------------------- */
+  function openMobileNav() {
+    if (!nav) return;
+    nav.classList.add("open");
+    if (hamburger) {
+      hamburger.classList.add("is-active");
+      hamburger.setAttribute("aria-expanded", "true");
+    }
+    if (navOverlay) navOverlay.classList.add("is-active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMobileNav() {
+    if (!nav) return;
+    nav.classList.remove("open");
+    if (hamburger) {
+      hamburger.classList.remove("is-active");
+      hamburger.setAttribute("aria-expanded", "false");
+    }
+    if (navOverlay) navOverlay.classList.remove("is-active");
+    document.body.style.overflow = "";
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener("click", (e) => {
+      e.stopPropagation();
+      nav && nav.classList.contains("open") ? closeMobileNav() : openMobileNav();
     });
   }
 
-  function closeAllDropdowns(except) {
-    $$(".nav__item--dropdown").forEach(d => { if (d !== except) d.classList.remove("open"); });
+  if (navCloseBtn) {
+    navCloseBtn.addEventListener("click", closeMobileNav);
   }
 
-  $$(".nav__item--dropdown > .nav__link").forEach(link => {
-    link.addEventListener("click", e => {
+  if (navOverlay) {
+    navOverlay.addEventListener("click", closeMobileNav);
+  }
+
+  // Study Destinations Dropdown Toggle
+  if (destDropdownTrigger) {
+    destDropdownTrigger.addEventListener("click", (e) => {
       e.preventDefault();
-      const item = link.parentElement;
-      const wasOpen = item.classList.contains("open");
-      closeAllDropdowns(item);
-      item.classList.toggle("open", !wasOpen);
-    });
-  });
-
-  document.addEventListener("click", e => {
-    if (!e.target.closest(".nav__item--dropdown")) closeAllDropdowns(null);
-  });
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeAllDropdowns(null);
-  });
-
-  $$(".nav__link").forEach(link => {
-    link.addEventListener("click", () => {
-      if (window.innerWidth <= 960 && !link.parentElement.classList.contains("nav__item--dropdown")) {
-        if (nav) nav.classList.remove("open");
-        if (hamburger) hamburger.classList.remove("is-active");
-        document.body.style.overflow = "";
+      const parent = destDropdownTrigger.closest(".nav__item--dropdown");
+      if (parent) {
+        const wasOpen = parent.classList.contains("open");
+        parent.classList.toggle("open", !wasOpen);
+        destDropdownTrigger.setAttribute("aria-expanded", !wasOpen ? "true" : "false");
       }
     });
+  }
+
+  // Close when clicking ANY link inside nav (except dropdown trigger)
+  $$(".nav a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (link === destDropdownTrigger) return;
+      if (window.innerWidth <= 960) {
+        closeMobileNav();
+      }
+    });
+  });
+
+  // Global click to close desktop dropdown
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".nav__item--dropdown")) {
+      const dropParent = $(".nav__item--dropdown");
+      if (dropParent) dropParent.classList.remove("open");
+    }
+  });
+
+  // Escape key closes mobile nav & dropdowns
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeMobileNav();
+      const dropParent = $(".nav__item--dropdown");
+      if (dropParent) dropParent.classList.remove("open");
+    }
   });
 
   if (toTopBtn) {
