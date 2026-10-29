@@ -279,141 +279,72 @@
   }
 
   /* ---------------------------------------------------------
-     HERO VIDEO SLIDER (Multi-Video Background)
+     HERO SEAMLESS 60FPS CINEMATIC SCENE CONTROLLER
+     - Single continuous 60fps video with crossfaded scenes
+     - Zero stutter, zero re-buffering, zero decoder reloading
   --------------------------------------------------------- */
-  const heroSlider = $("#heroSlider");
-  if (heroSlider) {
-    const slides = $$(".hero__slide", heroSlider);
-    const dots = $$(".hero__dot");
-    const prevBtn = $("#heroPrevBtn");
-    const nextBtn = $("#heroNextBtn");
-    let currentIndex = 0;
-    let autoTimer = null;
-    const SLIDE_DURATION = 7500; // 7.5 seconds per video slide
+  const heroVideo = $("#heroVideo");
+  const heroDots = $$(".hero__dot");
+  const heroPrevBtn = $("#heroPrevBtn");
+  const heroNextBtn = $("#heroNextBtn");
 
-    function playActiveVideo() {
-      const activeSlide = slides[currentIndex];
-      if (!activeSlide) return;
-      const vid = activeSlide.querySelector("video");
-      if (vid && !document.hidden) {
-        const p = vid.play();
-        if (p && p.catch) p.catch(() => {});
-      }
-    }
+  if (heroVideo) {
+    // Exact scene timestamps (Admissions: 0.0s, Travel: 5.2s, Arrival: 10.4s)
+    const sceneTimes = [0, 5.2, 10.4];
+    let currentScene = 0;
 
-    function pauseAllVideos() {
-      slides.forEach(slide => {
-        const v = slide.querySelector("video");
-        if (v && !v.paused) v.pause();
-      });
-    }
-
-    function preloadNextSlide() {
-      const nextIdx = (currentIndex + 1) % slides.length;
-      const nextVid = slides[nextIdx]?.querySelector("video");
-      if (nextVid && nextVid.preload === "none") {
-        nextVid.preload = "auto";
-        nextVid.load();
-      }
-    }
-
-    function goToSlide(targetIdx) {
-      if (slides.length <= 1) return;
-      const cleanIdx = ((targetIdx % slides.length) + slides.length) % slides.length;
-      if (cleanIdx === currentIndex && slides[currentIndex].classList.contains("is-active")) {
-        return;
-      }
-
-      const prevSlide = slides[currentIndex];
-      const nextSlide = slides[cleanIdx];
-
-      // Pause old video
-      const oldVid = prevSlide.querySelector("video");
-      if (oldVid) oldVid.pause();
-
-      prevSlide.classList.remove("is-active");
-      nextSlide.classList.add("is-active");
-
-      // Play new video smoothly
-      const newVid = nextSlide.querySelector("video");
-      if (newVid) {
-        if (newVid.preload === "none") {
-          newVid.preload = "auto";
-          newVid.load();
+    function setScene(idx) {
+      currentScene = ((idx % sceneTimes.length) + sceneTimes.length) % sceneTimes.length;
+      try {
+        heroVideo.currentTime = sceneTimes[currentScene];
+        if (heroVideo.paused && !document.hidden) {
+          heroVideo.play().catch(() => {});
         }
-        if (newVid.readyState >= 2) {
-          try { newVid.currentTime = 0; } catch(_) {}
-        }
-        if (!document.hidden) {
-          const p = newVid.play();
-          if (p && p.catch) p.catch(() => {});
-        }
-      }
-
-      // Update dots
-      dots.forEach((dot, i) => {
-        dot.classList.toggle("is-active", i === cleanIdx);
-      });
-
-      currentIndex = cleanIdx;
-
-      // Warm up subsequent slide video ahead of time
-      setTimeout(preloadNextSlide, 3500);
+      } catch (_) {}
+      updateDots();
     }
 
-    function nextSlide() {
-      goToSlide(currentIndex + 1);
-    }
-
-    function prevSlide() {
-      goToSlide(currentIndex - 1);
-    }
-
-    function startTimer() {
-      stopTimer();
-      autoTimer = setInterval(nextSlide, SLIDE_DURATION);
-    }
-
-    function stopTimer() {
-      if (autoTimer) {
-        clearInterval(autoTimer);
-        autoTimer = null;
-      }
-    }
-
-    // Controls
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        nextSlide();
-        startTimer();
-      });
-    }
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        prevSlide();
-        startTimer();
+    function updateDots() {
+      heroDots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === currentScene);
       });
     }
 
-    dots.forEach((dot, idx) => {
-      dot.addEventListener("click", () => {
-        goToSlide(idx);
-        startTimer();
-      });
+    if (heroNextBtn) {
+      heroNextBtn.addEventListener("click", () => setScene(currentScene + 1));
+    }
+    if (heroPrevBtn) {
+      heroPrevBtn.addEventListener("click", () => setScene(currentScene - 1));
+    }
+
+    heroDots.forEach((dot, idx) => {
+      dot.addEventListener("click", () => setScene(idx));
     });
 
-    // Start first video
-    playActiveVideo();
-    startTimer();
+    // Automatically sync pill highlight with video playback timestamp
+    heroVideo.addEventListener("timeupdate", () => {
+      const t = heroVideo.currentTime;
+      let activeIdx = 0;
+      if (t >= 10.4) activeIdx = 2;
+      else if (t >= 5.2) activeIdx = 1;
+      else activeIdx = 0;
 
-    // Pause when tab is hidden, resume when tab is visible
+      if (activeIdx !== currentScene) {
+        currentScene = activeIdx;
+        updateDots();
+      }
+    });
+
+    // Make sure it starts playing immediately
+    if (!document.hidden) {
+      heroVideo.play().catch(() => {});
+    }
+
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        pauseAllVideos();
-        stopTimer();
+        if (!heroVideo.paused) heroVideo.pause();
       } else {
-        playActiveVideo();
-        startTimer();
+        heroVideo.play().catch(() => {});
       }
     });
   }
