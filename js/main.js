@@ -234,10 +234,245 @@
     navOverlay.addEventListener("click", closeMobileNav);
   }
 
+  /* ---------------------------------------------------------
+     STUDY DESTINATIONS (Data, Dropdown & Interactive Modal)
+  --------------------------------------------------------- */
+  const DESTINATIONS_DATA = {
+    uk: {
+      id: "uk",
+      name: "Study In United Kingdom",
+      country: "United Kingdom",
+      flag: "🇬🇧",
+      tag: "British Council Certified Admissions",
+      overview: "The United Kingdom is a premier global destination for higher education, renowned for academic excellence, 1-year Master's programs, and world-ranking universities.",
+      intakes: "January · May · September",
+      workPermit: "2-Year Post-Study Work Visa (Graduate Route)",
+      avgFee: "£11,000 – £16,500 / yr (Scholarships available)",
+      degrees: "Undergraduate (3 yrs) · Postgraduate (1 yr) · Foundation · PhD",
+      universities: "University of Chichester, University of Sunderland, University of Bolton, Falmouth University, Queen's University Belfast, University of Surrey",
+      benefits: [
+        "1-Year Master's degrees save both tuition fees & living expenses",
+        "2-Year Graduate Route post-study work visa upon graduation",
+        "Options with and without IELTS (MOI accepted)",
+        "20 hours per week part-time work rights during study semesters"
+      ],
+      waText: "Hello Global Group of Education, I want to inquire about Study In United Kingdom admissions."
+    },
+    usa: {
+      id: "usa",
+      name: "Study In United States of America",
+      country: "United States of America",
+      flag: "🇺🇸",
+      tag: "World's Top Ranked Universities",
+      overview: "The United States offers unparalleled academic flexibility, cutting-edge research opportunities, and vibrant campus life across top-tier public and private institutions.",
+      intakes: "Fall (Aug/Sep) · Spring (Jan) · Summer (May)",
+      workPermit: "1 to 3 Years OPT (Optional Practical Training for STEM)",
+      avgFee: "$14,000 – $28,000 / yr (Merit Scholarships)",
+      degrees: "Bachelor's (4 yrs) · Master's (1.5 - 2 yrs) · Doctorate / PhD",
+      universities: "Leading State & Private Universities in New York, California, Texas, Florida, and Illinois",
+      benefits: [
+        "Up to 36 months (3 years) STEM OPT work permit in Fortune 500 companies",
+        "Extensive merit-based scholarships and campus assistantships",
+        "Transferable credit system allowing double majors and interdisciplinary minors",
+        "On-campus employment allowed up to 20 hours per week during term"
+      ],
+      waText: "Hello Global Group of Education, I want to inquire about Study In United States of America admissions."
+    },
+    canada: {
+      id: "canada",
+      name: "Study In Canada",
+      country: "Canada",
+      flag: "🇨🇦",
+      tag: "Permanent Residency Pathways",
+      overview: "Canada is recognized globally for affordable high-quality education, welcoming immigration policies, and exceptional quality of life.",
+      intakes: "September (Fall) · January (Winter) · May (Spring)",
+      workPermit: "Up to 3-Year Post-Graduation Work Permit (PGWP)",
+      avgFee: "CAD $14,000 – $22,000 / yr",
+      degrees: "Bachelor's Degrees · Post-Graduate Certificates · Master's Degrees · Diplomas",
+      universities: "Designated Learning Institutions (DLIs) across Ontario, British Columbia, and Alberta",
+      benefits: [
+        "Up to 3-year PGWP allowing open work permit for top Canadian employers",
+        "Direct pathways to Canadian Permanent Residency (PR) via Express Entry & PNP",
+        "Affordable tuition rates compared to other English-speaking nations",
+        "High safety index and student-friendly multicultural cities"
+      ],
+      waText: "Hello Global Group of Education, I want to inquire about Study In Canada admissions."
+    },
+    australia: {
+      id: "australia",
+      name: "Study In Australia",
+      country: "Australia",
+      flag: "🇦🇺",
+      tag: "High Quality of Life & Top Wages",
+      overview: "Australia boasts world-renowned Group of Eight universities, breathtaking lifestyle, and strong post-study employment frameworks.",
+      intakes: "February (Semester 1) · July (Semester 2) · November",
+      workPermit: "Subclass 485 Temporary Graduate Visa (up to 4-5 years)",
+      avgFee: "AUD $20,000 – $32,000 / yr",
+      degrees: "Bachelor's (3-4 yrs) · Master's (1.5-2 yrs) · VET / Vocational · PhD",
+      universities: "Top-tier Universities in Sydney, Melbourne, Brisbane, Adelaide, and Perth",
+      benefits: [
+        "Extended post-study work rights in regional and metropolitan zones",
+        "One of the highest minimum student wages in the world (AUD $23.23+/hr)",
+        "Internationally accredited degree qualifications recognized by global employers",
+        "Safe, vibrant student-friendly coastal cities with high standard of living"
+      ],
+      waText: "Hello Global Group of Education, I want to inquire about Study In Australia admissions."
+    },
+    hungary: {
+      id: "hungary",
+      name: "Study In Hungary",
+      country: "Hungary",
+      flag: "🇭🇺",
+      tag: "Schengen Visa & Low European Cost",
+      overview: "Located in the heart of Central Europe, Hungary offers fully accredited European Union degrees at a fraction of Western European tuition and living expenses.",
+      intakes: "September (Main Intake) · February (Spring)",
+      workPermit: "9-Month 'Study-to-Work' Visa & Schengen Visa Mobility",
+      avgFee: "€3,000 – €6,500 / yr (Extremely Affordable)",
+      degrees: "Bachelor's (3-3.5 yrs) · Master's (2 yrs) · Medicine / Dentistry (5-6 yrs)",
+      universities: "University of Debrecen, University of Szeged, Corvinus University of Budapest",
+      benefits: [
+        "Schengen Area resident permit granting free travel across 27 EU countries",
+        "Highly competitive tuition fees starting from just €3,000 per year",
+        "Low monthly cost of living (€450 – €650 includes accommodation & food)",
+        "European Higher Education Area (EHEA) accredited and globally accepted degrees"
+      ],
+      waText: "Hello Global Group of Education, I want to inquire about Study In Hungary admissions."
+    },
+    uae: {
+      id: "uae",
+      name: "Study In United Arab of Emirates",
+      country: "United Arab of Emirates",
+      flag: "🇦🇪",
+      tag: "100% Tax-Free Earnings in Dubai",
+      overview: "Dubai is the world's fastest growing education and business hub, hosting prestigious UK, Australian, and US branch campuses with zero tax on earnings.",
+      intakes: "September · January · April",
+      workPermit: "Green Visa & Golden Visa Options for Talented Graduates",
+      avgFee: "AED 35,000 – 65,000 / yr",
+      degrees: "Foundation · Undergraduate Degrees · Postgraduate & Executive MBA",
+      universities: "Middlesex University Dubai, Heriot-Watt University Dubai, University of Wollongong in Dubai",
+      benefits: [
+        "Earn a British, Australian, or American degree right in Dubai",
+        "100% tax-free income on all part-time and post-graduation employment",
+        "Quick and straightforward student visa processing (usually 2–3 weeks)",
+        "Seamless option to transfer to the UK or Australian home campus anytime"
+      ],
+      waText: "Hello Global Group of Education, I want to inquire about Study In United Arab of Emirates admissions."
+    }
+  };
+
+  const destModal = $("#destModal");
+  const destModalClose = $("#destModalClose");
+  const destModalBackdrop = $("#destModalBackdrop");
+  const destModalApplyBtn = $("#destModalApplyBtn");
+  const destModalWaBtn = $("#destModalWaBtn");
+  let activeDestKey = null;
+
+  function openDestModal(destKey) {
+    const data = DESTINATIONS_DATA[destKey];
+    if (!data || !destModal) return;
+    activeDestKey = destKey;
+
+    const flagEl = $("#destModalFlag");
+    const countryEl = $("#destModalCountry");
+    const titleEl = $("#destModalTitle");
+    const tagEl = $("#destModalTag");
+    const overviewEl = $("#destModalOverview");
+    const intakesEl = $("#destModalIntakes");
+    const workEl = $("#destModalWork");
+    const degreesEl = $("#destModalDegrees");
+    const feeEl = $("#destModalFee");
+    const unisEl = $("#destModalUnis");
+
+    if (flagEl) flagEl.textContent = data.flag;
+    if (countryEl) countryEl.textContent = data.country;
+    if (titleEl) titleEl.textContent = data.name;
+    if (tagEl) tagEl.textContent = data.tag;
+    if (overviewEl) overviewEl.textContent = data.overview;
+    if (intakesEl) intakesEl.textContent = data.intakes;
+    if (workEl) workEl.textContent = data.workPermit;
+    if (degreesEl) degreesEl.textContent = data.degrees;
+    if (feeEl) feeEl.textContent = data.avgFee;
+    if (unisEl) unisEl.textContent = data.universities;
+
+    const benefitsList = $("#destModalBenefits");
+    if (benefitsList) {
+      benefitsList.innerHTML = data.benefits
+        .map(b => `<li><i class="fa-solid fa-circle-check"></i> <span>${b}</span></li>`)
+        .join("");
+    }
+
+    if (destModalWaBtn) {
+      destModalWaBtn.href = `https://wa.me/447586589659?text=${encodeURIComponent(data.waText)}`;
+    }
+
+    destModal.classList.add("is-open");
+    destModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDestModal() {
+    if (!destModal) return;
+    destModal.classList.remove("is-open");
+    destModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    activeDestKey = null;
+  }
+
+  if (destModalClose) destModalClose.addEventListener("click", closeDestModal);
+  if (destModalBackdrop) destModalBackdrop.addEventListener("click", closeDestModal);
+
+  if (destModalApplyBtn) {
+    destModalApplyBtn.addEventListener("click", () => {
+      const data = activeDestKey ? DESTINATIONS_DATA[activeDestKey] : null;
+      closeDestModal();
+
+      // Auto-select country in student registration form
+      const regCountry = $("#regCountry");
+      if (regCountry && data) {
+        for (let i = 0; i < regCountry.options.length; i++) {
+          if (regCountry.options[i].value === data.country || regCountry.options[i].text.includes(data.country)) {
+            regCountry.selectedIndex = i;
+            regCountry.dispatchEvent(new Event("change", { bubbles: true }));
+            const field = regCountry.closest(".reg-field");
+            if (field) field.classList.add("is-filled");
+            break;
+          }
+        }
+      }
+
+      // Smooth scroll to Student Registration section
+      const enquirySection = $("#enquiry");
+      if (enquirySection) {
+        enquirySection.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          const firstInput = $("#regFirstName");
+          if (firstInput) firstInput.focus();
+        }, 600);
+      }
+    });
+  }
+
+  // Bind all elements with [data-open-dest] (both cards and dropdown items)
+  document.addEventListener("click", (e) => {
+    const trigger = e.target.closest("[data-open-dest]");
+    if (trigger) {
+      e.preventDefault();
+      const destKey = trigger.dataset.openDest;
+      if (destKey) {
+        // If mobile drawer was open, close it
+        closeMobileNav();
+        const dropParent = trigger.closest(".nav__item--dropdown");
+        if (dropParent) dropParent.classList.remove("open");
+        openDestModal(destKey);
+      }
+    }
+  });
+
   // Study Destinations Dropdown Toggle
   if (destDropdownTrigger) {
     destDropdownTrigger.addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopPropagation();
       const parent = destDropdownTrigger.closest(".nav__item--dropdown");
       if (parent) {
         const wasOpen = parent.classList.contains("open");
@@ -250,7 +485,7 @@
   // Close when clicking ANY link inside nav (except dropdown trigger)
   $$(".nav a").forEach(link => {
     link.addEventListener("click", () => {
-      if (link === destDropdownTrigger) return;
+      if (link.closest("#destDropdownMenu")) return; // destination links handled separately
       if (window.innerWidth <= 960) {
         closeMobileNav();
       }
@@ -262,15 +497,18 @@
     if (!e.target.closest(".nav__item--dropdown")) {
       const dropParent = $(".nav__item--dropdown");
       if (dropParent) dropParent.classList.remove("open");
+      if (destDropdownTrigger) destDropdownTrigger.setAttribute("aria-expanded", "false");
     }
   });
 
-  // Escape key closes mobile nav & dropdowns
+  // Escape key closes mobile nav, dropdowns, and modal
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
+      closeDestModal();
       closeMobileNav();
       const dropParent = $(".nav__item--dropdown");
       if (dropParent) dropParent.classList.remove("open");
+      if (destDropdownTrigger) destDropdownTrigger.setAttribute("aria-expanded", "false");
     }
   });
 
