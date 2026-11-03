@@ -405,16 +405,18 @@
       destModalWaBtn.href = `https://wa.me/447586589659?text=${encodeURIComponent(data.waText)}`;
     }
 
-    destModal.classList.add("is-open");
-    destModal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+      destModal.classList.add("is-open");
+      destModal.setAttribute("aria-hidden", "false");
+    });
+    document.documentElement.style.overflow = "hidden";
   }
 
   function closeDestModal() {
     if (!destModal) return;
     destModal.classList.remove("is-open");
     destModal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
     activeDestKey = null;
   }
 
