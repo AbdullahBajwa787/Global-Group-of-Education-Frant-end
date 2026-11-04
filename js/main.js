@@ -822,6 +822,139 @@
     });
   }
 
+  /* ---------------------------------------------------------
+     ULTRA-SMOOTH INERTIAL SCROLL ENGINE (960fps / 240Hz Fluidity)
+     - High-precision LERP interpolation for mouse wheels
+     - Frame-rate independent delta time exponential decay
+     - Instant sync with scrollbar dragging & key navigation
+     - Native touch on iOS / Android preserved untouched
+     - Modal and dropdown scroll isolation
+  --------------------------------------------------------- */
+  (function initUltraSmoothScroll() {
+    // Only enable on pointer devices with mouse wheels (non-touch screens)
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0 && window.innerWidth <= 960);
+    if (isTouch) return;
+
+    let currentY = window.scrollY || window.pageYOffset || 0;
+    let targetY = currentY;
+    let isRunning = false;
+    let rafId = 0;
+    let lastTime = performance.now();
+
+    function getMaxScroll() {
+      return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    }
+
+    function lerp(start, end, factor) {
+      return start + (end - start) * factor;
+    }
+
+    function render(now) {
+      const deltaMs = Math.min(now - lastTime, 40); // Cap frame delta to prevent jumps
+      lastTime = now;
+
+      // Exponential decay formula (identical speed across 60Hz, 120Hz, 240Hz, 960fps)
+      const factor = 1 - Math.exp(-0.0075 * deltaMs);
+      currentY = lerp(currentY, targetY, factor);
+
+      if (Math.abs(targetY - currentY) < 0.35) {
+        currentY = targetY;
+        window.scrollTo(0, currentY);
+        isRunning = false;
+        return;
+      }
+
+      window.scrollTo(0, currentY);
+      rafId = requestAnimationFrame(render);
+    }
+
+    function startAnimation() {
+      if (!isRunning) {
+        isRunning = true;
+        lastTime = performance.now();
+        rafId = requestAnimationFrame(render);
+      }
+    }
+
+    // Wheel event handler
+    window.addEventListener("wheel", (e) => {
+      // Don't intercept when modal is open or when user scrolls inside an inner scrollable area
+      if (document.body.classList.contains("modal-open")) return;
+      const target = e.target;
+      if (target && target.closest && (target.closest(".dest-modal") || target.closest(".nav.open") || target.closest("select") || target.closest("textarea"))) {
+        return;
+      }
+
+      let delta = e.deltaY;
+      if (e.deltaMode === 1) delta *= 36;
+      else if (e.deltaMode === 2) delta *= window.innerHeight;
+
+      // Smooth step
+      const maxScroll = getMaxScroll();
+      targetY = Math.min(Math.max(targetY + delta, 0), maxScroll);
+      e.preventDefault();
+      startAnimation();
+    }, { passive: false });
+
+    // Sync on native scroll (e.g. dragging scrollbar, home/end keys)
+    window.addEventListener("scroll", () => {
+      if (!isRunning) {
+        currentY = window.scrollY || window.pageYOffset || 0;
+        targetY = currentY;
+      }
+    }, { passive: true });
+
+    // Keyboard smooth navigation (Arrow keys, PageUp/Down, Space, Home, End)
+    window.addEventListener("keydown", (e) => {
+      if (document.body.classList.contains("modal-open")) return;
+      const tag = document.activeElement ? document.activeElement.tagName : "";
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+
+      let keyDelta = 0;
+      if (e.key === "ArrowDown") keyDelta = 90;
+      else if (e.key === "ArrowUp") keyDelta = -90;
+      else if (e.key === "PageDown" || (e.key === " " && !e.shiftKey)) keyDelta = window.innerHeight * 0.85;
+      else if (e.key === "PageUp" || (e.key === " " && e.shiftKey)) keyDelta = -window.innerHeight * 0.85;
+      else if (e.key === "Home") {
+        targetY = 0;
+        e.preventDefault();
+        startAnimation();
+        return;
+      } else if (e.key === "End") {
+        targetY = getMaxScroll();
+        e.preventDefault();
+        startAnimation();
+        return;
+      }
+
+      if (keyDelta !== 0) {
+        e.preventDefault();
+        const maxScroll = getMaxScroll();
+        targetY = Math.min(Math.max(targetY + keyDelta, 0), maxScroll);
+        startAnimation();
+      }
+    });
+
+    // Smooth anchor navigation for all internal links
+    document.addEventListener("click", (e) => {
+      const anchor = e.target.closest('a[href^="#"]');
+      if (anchor) {
+        const hash = anchor.getAttribute("href");
+        if (hash && hash.length > 1 && !anchor.closest(".dropdown")) {
+          const el = document.querySelector(hash);
+          if (el) {
+            e.preventDefault();
+            const rect = el.getBoundingClientRect();
+            const top = rect.top + (window.scrollY || window.pageYOffset) - 80;
+            const maxScroll = getMaxScroll();
+            targetY = Math.min(Math.max(top, 0), maxScroll);
+            startAnimation();
+          }
+        }
+      }
+    });
+  })();
+
   window.addEventListener("resize", () => {
     measureSections();
     if (dotsBox) { buildDots(); updateTesti(); }
