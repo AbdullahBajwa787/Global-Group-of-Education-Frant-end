@@ -16,7 +16,7 @@
   <link rel="preload" as="image"
     href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68"
     fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=153">
+  <link rel="stylesheet" href="css/style.css?v=154">
   <style>
     /* Guaranteed instant visibility & live 1:1 real-time smooth scrolling */
     html {
@@ -301,7 +301,7 @@
   <!-- ================= OUR SERVICES ================= -->
   <section class="section services" id="services">
     <div class="services__video-bg">
-      <video class="services__video" autoplay muted loop playsinline preload="auto" poster="assets/service-bg.jpg">
+      <video class="services__video" id="servicesVideo" autoplay muted loop playsinline preload="metadata" poster="assets/service-bg.jpg">
         <source src="assets/services-bg-video.mp4" type="video/mp4">
       </video>
       <div class="services__video-overlay"></div>
@@ -415,7 +415,8 @@
           </p>
 
           <div class="about-feature">
-            <h3 class="about-feature__title">OUR WELL-GROUNDED TEAM</h3>
+            <!-- Typography Spacing & Readability: Clean Title Case -->
+            <h3 class="about-feature__title">Our Well-Grounded Team</h3>
             <p class="about-feature__desc">
               We have trustworthy consultant’s veterans who are highly qualified and are skilled at their work. Our
               expert team that will guide you according to your preference and potential, and will also provide you with
@@ -424,7 +425,8 @@
           </div>
 
           <div class="about-feature">
-            <h3 class="about-feature__title">WHY CHOOSE GLOBAL GROUP OF EDUCATION?</h3>
+            <!-- Typography Spacing & Readability: Clean Title Case -->
+            <h3 class="about-feature__title">Why Choose Global Group of Education?</h3>
             <p class="about-feature__desc">
               We have a mission of making international education accessible and providing students with opportunities
               that will lead them towards a successful career. We are reliable, co-operative and have a fantastic team
@@ -450,7 +452,7 @@
 
 
   <!-- ================= STATS ================= -->
-  <section class="stats" id="stats">
+  <section class="section stats" id="stats">
     <div class="stats__bg"></div>
     <div class="container">
       <div class="section__head section__head--light reveal">
@@ -458,20 +460,21 @@
         <h2>The Numbers <span>Say It All</span></h2>
       </div>
       <div class="stats__grid">
+        <!-- Real fallback numbers provided in markup to prevent static '0' display -->
         <div class="stat reveal">
-          <div class="stat__num" data-count="4275" data-suffix="+">0</div>
+          <div class="stat__num" data-count="3935" data-suffix="+">3,935+</div>
           <div class="stat__label">Happy Students</div><i class="fa-solid fa-face-smile"></i>
         </div>
         <div class="stat reveal">
-          <div class="stat__num" data-count="3960" data-suffix="+">0</div>
+          <div class="stat__num" data-count="100" data-suffix="%">100%</div>
           <div class="stat__label">Visa Success</div><i class="fa-solid fa-passport"></i>
         </div>
         <div class="stat reveal">
-          <div class="stat__num" data-count="100" data-suffix="%">0</div>
+          <div class="stat__num" data-count="500" data-suffix="+">500+</div>
           <div class="stat__label">Scholarships</div><i class="fa-solid fa-graduation-cap"></i>
         </div>
         <div class="stat reveal">
-          <div class="stat__num" data-count="691" data-suffix="+">0</div>
+          <div class="stat__num" data-count="50" data-suffix="+">50+</div>
           <div class="stat__label">Certified Courses</div><i class="fa-solid fa-layer-group"></i>
         </div>
       </div>
@@ -505,7 +508,7 @@
             <span>400+ Partner Universities</span>
             <strong>Study In United Kingdom</strong>
             <p class="dest-card__desc">2-Year Graduate Route Visa, 1-Year Master's degrees &amp; British Council certified admissions.</p>
-            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="uk">
+            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="uk" aria-label="View Details for United Kingdom">
               <span>View Details</span> <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
@@ -518,7 +521,7 @@
             <span>350+ Partner Universities</span>
             <strong>Study In United States of America</strong>
             <p class="dest-card__desc">Top world university rankings, up to 3 years STEM OPT work permit &amp; generous merit scholarships.</p>
-            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="usa">
+            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="usa" aria-label="View Details for United States">
               <span>View Details</span> <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
@@ -531,7 +534,7 @@
             <span>280+ Partner Universities</span>
             <strong>Study In Canada</strong>
             <p class="dest-card__desc">Post-Graduation Work Permit (PGWP) up to 3 years, direct pathway to PR &amp; affordable tuition.</p>
-            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="canada">
+            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="canada" aria-label="View Details for Canada">
               <span>View Details</span> <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
@@ -544,7 +547,7 @@
             <span>240+ Partner Universities</span>
             <strong>Study In Australia</strong>
             <p class="dest-card__desc">Subclass 485 post-study work rights up to 4-5 years, high student hourly wages &amp; Group of Eight unis.</p>
-            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="australia">
+            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="australia" aria-label="View Details for Australia">
               <span>View Details</span> <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
@@ -557,7 +560,7 @@
             <span>120+ Partner Universities</span>
             <strong>Study In Hungary</strong>
             <p class="dest-card__desc">Schengen visa travel across 27 EU nations, low European living costs &amp; accredited degrees.</p>
-            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="hungary">
+            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="hungary" aria-label="View Details for Hungary">
               <span>View Details</span> <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
@@ -570,7 +573,7 @@
             <span>160+ Partner Universities</span>
             <strong>Study In United Arab of Emirates</strong>
             <p class="dest-card__desc">100% tax-free income, dynamic global corporate hub &amp; prestigious British/Australian branch campuses.</p>
-            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="uae">
+            <button type="button" class="btn btn--accent btn--sm dest-card__btn" data-open-dest="uae" aria-label="View Details for United Arab Emirates">
               <span>View Details</span> <i class="fa-solid fa-arrow-right"></i>
             </button>
           </div>
@@ -663,7 +666,7 @@
   <!-- ================= STUDENT REGISTRATION ================= -->
   <section class="section student-reg-section" id="enquiry">
     <div class="student-reg__video-bg">
-      <video class="student-reg__video" autoplay muted loop playsinline preload="auto" poster="assets/student-registration.png">
+      <video class="student-reg__video" id="studentRegVideo" autoplay muted loop playsinline preload="metadata" poster="assets/student-registration.png">
         <source src="assets/student-reg-bg-video.mp4" type="video/mp4">
       </video>
       <div class="student-reg__video-overlay"></div>
@@ -1064,7 +1067,7 @@
     <span class="float-wa__tooltip">Chat with Advisor</span>
   </a>
 
-  <script src="js/main.js?v=153" defer></script>
+  <script src="js/main.js?v=154" defer></script>
 </body>
 
 </html>

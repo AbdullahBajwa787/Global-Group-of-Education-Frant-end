@@ -660,31 +660,45 @@
       }
     });
 
-    // Make sure it starts playing immediately
-    if (!document.hidden) {
+    // Make sure it starts playing immediately on desktop screens (>=768px)
+    const isDesktop = () => window.innerWidth >= 768;
+    if (!document.hidden && isDesktop()) {
       heroVideo.play().catch(() => {});
     }
 
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         if (!heroVideo.paused) heroVideo.pause();
-      } else {
+      } else if (isDesktop()) {
         heroVideo.play().catch(() => {});
       }
     });
   }
 
-
+  // Mobile & Video Performance Optimization: Pause and save bandwidth on mobile screens
+  if (window.innerWidth < 768) {
+    const bgVideos = document.querySelectorAll(".hero__video, .services__video, .student-reg__video");
+    bgVideos.forEach(v => {
+      try {
+        v.pause();
+        v.removeAttribute("autoplay");
+      } catch (_) {}
+    });
+  }
 
   /* ---------------------------------------------------------
-     COUNTER ANIMATION
+     COUNTER ANIMATION (Optimized with Fallback & 0.2 Threshold)
   --------------------------------------------------------- */
   function animateCount(el) {
     const target = parseFloat(el.dataset.count);
+    if (isNaN(target)) return;
     const suffix = el.dataset.suffix || "";
     const decimals = parseInt(el.dataset.decimals || "0", 10);
     const dur = 1800;
     const start = performance.now();
+
+    // Reset from 0 when animation begins
+    el.textContent = (decimals ? (0).toFixed(decimals) : "0") + suffix;
 
     function tick(now) {
       const p = Math.min((now - start) / dur, 1);
@@ -705,7 +719,7 @@
           counterObs.unobserve(en.target);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
     $$(".stat__num").forEach(el => counterObs.observe(el));
   } else {
     $$(".stat__num").forEach(animateCount);
