@@ -484,36 +484,79 @@
     }
   });
 
-  // Study Destinations Dropdown Toggle
-  if (destDropdownTrigger) {
-    destDropdownTrigger.addEventListener("click", (e) => {
+  // Dropdown Toggles (Study Destinations & Courses)
+  $$(".nav__dropdown-trigger").forEach(trigger => {
+    trigger.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const parent = destDropdownTrigger.closest(".nav__item--dropdown");
+      const parent = trigger.closest(".nav__item--dropdown");
       if (parent) {
         const wasOpen = parent.classList.contains("open");
+        // Close any other open dropdowns first
+        $$(".nav__item--dropdown.open").forEach(other => {
+          if (other !== parent) {
+            other.classList.remove("open");
+            const btn = other.querySelector(".nav__dropdown-trigger");
+            if (btn) btn.setAttribute("aria-expanded", "false");
+          }
+        });
         parent.classList.toggle("open", !wasOpen);
-        destDropdownTrigger.setAttribute("aria-expanded", !wasOpen ? "true" : "false");
+        trigger.setAttribute("aria-expanded", !wasOpen ? "true" : "false");
       }
     });
-  }
+  });
 
-  // Close when clicking ANY link inside nav (except dropdown trigger)
+  // Course selection click handler
+  document.addEventListener("click", (e) => {
+    const courseTrigger = e.target.closest("[data-select-course]");
+    if (courseTrigger) {
+      e.preventDefault();
+      const courseName = courseTrigger.dataset.selectCourse;
+      closeMobileNav();
+      $$(".nav__item--dropdown.open").forEach(drop => {
+        drop.classList.remove("open");
+        const btn = drop.querySelector(".nav__dropdown-trigger");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
+
+      const regSection = $("#enquiry");
+      if (regSection) {
+        regSection.scrollIntoView({ behavior: "smooth" });
+      }
+
+      const regCourse = $("#regCourse");
+      if (regCourse && courseName) {
+        for (let i = 0; i < regCourse.options.length; i++) {
+          if (regCourse.options[i].value === courseName || regCourse.options[i].text.includes(courseName)) {
+            regCourse.selectedIndex = i;
+            regCourse.dispatchEvent(new Event("change", { bubbles: true }));
+            const field = regCourse.closest(".reg-field");
+            if (field) field.classList.add("is-filled");
+            break;
+          }
+        }
+      }
+    }
+  });
+
+  // Close when clicking ANY link inside nav (except dropdown triggers & dropdown items)
   $$(".nav a").forEach(link => {
     link.addEventListener("click", () => {
-      if (link.closest("#destDropdownMenu")) return; // destination links handled separately
+      if (link.closest(".dropdown")) return; // dropdown links handled separately
       if (window.innerWidth <= 960) {
         closeMobileNav();
       }
     });
   });
 
-  // Global click to close desktop dropdown
+  // Global click to close desktop dropdowns
   document.addEventListener("click", (e) => {
     if (!e.target.closest(".nav__item--dropdown")) {
-      const dropParent = $(".nav__item--dropdown");
-      if (dropParent) dropParent.classList.remove("open");
-      if (destDropdownTrigger) destDropdownTrigger.setAttribute("aria-expanded", "false");
+      $$(".nav__item--dropdown.open").forEach(drop => {
+        drop.classList.remove("open");
+        const btn = drop.querySelector(".nav__dropdown-trigger");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
     }
   });
 
@@ -522,9 +565,11 @@
     if (e.key === "Escape") {
       closeDestModal();
       closeMobileNav();
-      const dropParent = $(".nav__item--dropdown");
-      if (dropParent) dropParent.classList.remove("open");
-      if (destDropdownTrigger) destDropdownTrigger.setAttribute("aria-expanded", "false");
+      $$(".nav__item--dropdown.open").forEach(drop => {
+        drop.classList.remove("open");
+        const btn = drop.querySelector(".nav__dropdown-trigger");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
     }
   });
 
