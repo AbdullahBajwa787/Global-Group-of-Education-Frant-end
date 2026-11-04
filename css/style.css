@@ -33,6 +33,7 @@
 ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
 
 html{
+  scroll-behavior:smooth;
   scroll-padding-top:80px;
   scrollbar-gutter:stable;
   text-rendering:optimizeLegibility;
