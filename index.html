@@ -16,7 +16,7 @@
   <link rel="preload" as="image"
     href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68"
     fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=145">
+  <link rel="stylesheet" href="css/style.css?v=146">
   <style>
     /* Guaranteed instant visibility & ultra smooth scrolling */
     html {
@@ -288,7 +288,13 @@
 
   <!-- ================= OUR SERVICES ================= -->
   <section class="section services" id="services">
-    <div class="container">
+    <div class="services__video-bg">
+      <video class="services__video" autoplay muted loop playsinline preload="auto" poster="assets/service-bg.jpg">
+        <source src="assets/services-bg-video.mp4" type="video/mp4">
+      </video>
+      <div class="services__video-overlay"></div>
+    </div>
+    <div class="container services__content">
       <div class="section__head reveal">
         <span class="eyebrow">What We Do</span>
         <h2>Our <span>Services</span></h2>
@@ -1055,7 +1061,7 @@
     <span class="float-wa__tooltip">Chat with Advisor</span>
   </a>
 
-  <script src="js/main.js?v=145" defer></script>
+  <script src="js/main.js?v=146" defer></script>
 </body>
 
 </html>

@@ -532,6 +532,19 @@
     toTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
 
+  // Reliable autoplay for Services Background Video
+  const servicesVideo = $(".services__video");
+  if (servicesVideo) {
+    const playServices = () => {
+      if (servicesVideo.paused) {
+        servicesVideo.play().catch(() => {});
+      }
+    };
+    playServices();
+    window.addEventListener("scroll", playServices, { once: true, passive: true });
+    document.addEventListener("touchstart", playServices, { once: true, passive: true });
+  }
+
   /* ---------------------------------------------------------
      HERO SEAMLESS 60FPS CINEMATIC SCENE CONTROLLER
      - Single continuous 60fps video with crossfaded scenes
