@@ -405,18 +405,21 @@
       destModalWaBtn.href = `https://wa.me/447586589659?text=${encodeURIComponent(data.waText)}`;
     }
 
-    requestAnimationFrame(() => {
-      destModal.classList.add("is-open");
-      destModal.setAttribute("aria-hidden", "false");
-    });
-    document.documentElement.style.overflow = "hidden";
+    // Reset scroll to top
+    const modalBody = destModal.querySelector(".dest-modal__body");
+    if (modalBody) modalBody.scrollTop = 0;
+
+    // Instant open without frame latency or layout reflow
+    document.body.classList.add("modal-open");
+    destModal.classList.add("is-open");
+    destModal.setAttribute("aria-hidden", "false");
   }
 
   function closeDestModal() {
     if (!destModal) return;
     destModal.classList.remove("is-open");
     destModal.setAttribute("aria-hidden", "true");
-    document.documentElement.style.overflow = "";
+    document.body.classList.remove("modal-open");
     activeDestKey = null;
   }
 
@@ -461,10 +464,21 @@
       e.preventDefault();
       const destKey = trigger.dataset.openDest;
       if (destKey) {
-        // If mobile drawer was open, close it
-        closeMobileNav();
+        // Close dropdown immediately
         const dropParent = trigger.closest(".nav__item--dropdown");
         if (dropParent) dropParent.classList.remove("open");
+        if (destDropdownTrigger) destDropdownTrigger.setAttribute("aria-expanded", "false");
+
+        // If mobile drawer was open, close cleanly so it doesn't fight the modal for GPU
+        if (nav && nav.classList.contains("open")) {
+          nav.classList.remove("open");
+          if (hamburger) {
+            hamburger.classList.remove("is-active");
+            hamburger.setAttribute("aria-expanded", "false");
+          }
+          if (navOverlay) navOverlay.classList.remove("is-active");
+        }
+
         openDestModal(destKey);
       }
     }
