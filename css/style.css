@@ -527,24 +527,44 @@ h1 span,h2 span{
 .uni-card--logo:hover .uni-card__logo img{opacity:1}
 
 /* ============================================================
-   STUDENT REGISTRATION (Image 2 design)
+   STUDENT REGISTRATION (Image 2 design with Background Video)
    ============================================================ */
 .student-reg-section{
-  background:radial-gradient(circle at 80% 20%, #152e5d 0%, var(--navy) 70%);
-  padding:clamp(60px, 8vw, 95px) 0;
   position:relative;
   overflow:hidden;
+  background:#0b1a37;
+  padding:clamp(65px, 8vw, 105px) 0;
 }
-.student-reg-section::before{
-  content:"";position:absolute;width:550px;height:550px;border-radius:50%;right:-180px;top:-120px;
-  background:radial-gradient(circle,rgba(251,176,25,.18),transparent 65%);pointer-events:none;
+.student-reg__video-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:1;
 }
-.student-reg-section::after{
-  content:"";position:absolute;width:480px;height:480px;border-radius:50%;left:-160px;bottom:-140px;
-  background:radial-gradient(circle,rgba(16,39,113,.35),transparent 65%);pointer-events:none;
+.student-reg__video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.05);
+  will-change:transform;
+  opacity:.42;
+}
+.student-reg__video-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg, rgba(11,26,55,.88) 0%, rgba(16,39,113,.76) 50%, rgba(11,26,55,.94) 100%);
+  z-index:2;
+}
+.student-reg__content{
+  position:relative;
+  z-index:3;
 }
 .student-reg-card{
   position:relative;
+  z-index:4;
   max-width:1080px;
   margin:0 auto;
   background:#fbfcfe;

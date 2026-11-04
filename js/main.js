@@ -545,6 +545,19 @@
     document.addEventListener("touchstart", playServices, { once: true, passive: true });
   }
 
+  // Reliable autoplay for Student Registration Background Video
+  const regVideo = $(".student-reg__video");
+  if (regVideo) {
+    const playReg = () => {
+      if (regVideo.paused) {
+        regVideo.play().catch(() => {});
+      }
+    };
+    playReg();
+    window.addEventListener("scroll", playReg, { once: true, passive: true });
+    document.addEventListener("touchstart", playReg, { once: true, passive: true });
+  }
+
   /* ---------------------------------------------------------
      HERO SEAMLESS 60FPS CINEMATIC SCENE CONTROLLER
      - Single continuous 60fps video with crossfaded scenes
