@@ -285,7 +285,7 @@ h1 span,h2 span{
 }
 .hero__overlay{
   position:absolute;inset:0;
-  background:linear-gradient(110deg,rgba(11,26,55,.68) 0%,rgba(16,39,113,.42) 50%,rgba(11,26,55,.22) 100%);
+  background:linear-gradient(135deg, rgba(16,39,113,.74) 0%, rgba(21,52,148,.68) 50%, rgba(16,39,113,.75) 100%);
   z-index:2;
 }
 
@@ -572,7 +572,7 @@ h1 span,h2 span{
 .student-reg__video-overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(135deg, rgba(11,26,55,.54) 0%, rgba(16,39,113,.40) 50%, rgba(11,26,55,.58) 100%);
+  background:linear-gradient(135deg, rgba(16,39,113,.72) 0%, rgba(21,52,148,.68) 50%, rgba(16,39,113,.75) 100%);
   z-index:2;
 }
 .student-reg__content{
@@ -1467,7 +1467,7 @@ h1 span,h2 span{
 .services__video-overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(135deg, rgba(11,26,55,.50) 0%, rgba(16,39,113,.38) 50%, rgba(11,26,55,.52) 100%);
+  background:linear-gradient(135deg, rgba(16,39,113,.72) 0%, rgba(21,52,148,.68) 50%, rgba(16,39,113,.75) 100%);
   z-index:2;
 }
 .services__content{
