@@ -378,7 +378,7 @@ h1 span,h2 span{
     background: url('../assets/service-bg.jpg') center/cover no-repeat !important;
   }
   .student-reg__video-bg {
-    background: url('../assets/student-reg-poster.jpg') center/cover no-repeat !important;
+    background: url('../assets/student-reg-poster.jpg?v=3') center/cover no-repeat !important;
   }
 
   .hero__controls{
@@ -567,12 +567,12 @@ h1 span,h2 span{
   object-fit:cover;
   transform:scale(1.05);
   will-change:transform;
-  opacity:.50;
+  opacity:.55;
 }
 .student-reg__video-overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(135deg, rgba(11,26,55,.82) 0%, rgba(16,39,113,.68) 50%, rgba(11,26,55,.88) 100%);
+  background:linear-gradient(135deg, rgba(11,26,55,.80) 0%, rgba(16,39,113,.66) 50%, rgba(11,26,55,.84) 100%);
   z-index:2;
 }
 .student-reg__content{
