@@ -1441,13 +1441,13 @@ h1 span,h2 span{
   object-fit:cover;
   transform:scale(1.05);
   will-change:transform;
-  opacity:.88;
-  filter:contrast(1.06) brightness(1.02);
+  opacity:.95;
+  filter:contrast(1.12) brightness(0.92) saturate(0.85);
 }
 .services__video-overlay{
   position:absolute;
   inset:0;
-  background:linear-gradient(180deg, rgba(11,26,55,.50) 0%, rgba(16,39,113,.38) 50%, rgba(11,26,55,.58) 100%);
+  background:linear-gradient(135deg, rgba(11,26,55,.82) 0%, rgba(16,39,113,.76) 50%, rgba(11,26,55,.84) 100%);
   z-index:2;
 }
 .services__content{
