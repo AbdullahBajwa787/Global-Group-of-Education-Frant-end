@@ -9,14 +9,21 @@
     content="Global Group of Education — Trusted study abroad consultants for UK, USA, Canada, Australia, Hungary & UAE. University admissions, visa guidance & scholarships.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Redundant high-availability CDN fallback to prevent tofu / empty boxes -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"
+    crossorigin="anonymous">
   <link rel="preload" as="image"
     href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68"
     fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=159">
+  <link rel="stylesheet" href="css/style.css?v=161">
   <style>
     /* Guaranteed instant visibility & live 1:1 real-time smooth scrolling */
     html {
@@ -33,28 +40,13 @@
       visibility: visible !important;
     }
 
-    /* Hardware-accelerated GPU layer promotion for liquid smooth 960fps scroll */
-    .hero,
-    .uni-marquee,
-    .trust,
-    .services,
-    .about,
-    .stats,
-    .destinations,
-    .student-reg-section,
-    .testimonials,
-    .contact,
-    .footer {
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-
+    /* Clean high-performance GPU compositing without VRAM layer bloat */
     .uni-track,
-    .testi-track {
+    .testi-track,
+    .float-wa {
       will-change: transform;
       transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
     }
   </style>
 </head>
@@ -387,7 +379,7 @@
         <div class="about-media">
           <figure class="about-media__fig">
             <img src="assets/abt-img2.png" alt="Successful Student Graduate - Global Group of Education" width="270"
-              height="376" loading="lazy">
+              height="376" loading="lazy" decoding="async">
           </figure>
           <div class="about-experience">
             <div class="about-experience__inner">
@@ -788,7 +780,7 @@
             target="_blank" rel="noopener" class="student-reg__qr-box" title="Click or Scan QR to register">
             <div class="student-reg__qr-inner">
               <img src="assets/qr-code-hd.png" alt="Scan QR For Student Registration" width="90" height="90"
-                class="student-reg__qr-img">
+                class="student-reg__qr-img" loading="lazy" decoding="async">
             </div>
           </a>
           <h4 class="student-reg__qr-title">Scan QR For Student<br>Registration</h4>
@@ -1067,7 +1059,7 @@
     <span class="float-wa__tooltip">Chat with Advisor</span>
   </a>
 
-  <script src="js/main.js?v=159" defer></script>
+  <script src="js/main.js?v=161" defer></script>
 </body>
 
 </html>

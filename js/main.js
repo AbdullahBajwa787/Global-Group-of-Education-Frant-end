@@ -577,30 +577,65 @@
     toTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
   }
 
-  // Reliable autoplay for Services Background Video
-  const servicesVideo = $(".services__video");
-  if (servicesVideo) {
-    const playServices = () => {
-      if (servicesVideo.paused) {
-        servicesVideo.play().catch(() => {});
-      }
-    };
-    playServices();
-    window.addEventListener("scroll", playServices, { once: true, passive: true });
-    document.addEventListener("touchstart", playServices, { once: true, passive: true });
+  /* ---------------------------------------------------------
+     VIEWPORT-AWARE VIDEO PERFORMANCE & SMOOTH PLAYBACK MANAGER
+     - Intelligently pauses offscreen background videos to eliminate
+       multi-decoder GPU saturation and scroll frame drops.
+     - Automatically resumes playback as the user scrolls into view.
+     - Pauses videos when tab is switched/hidden.
+     - Disables autoplay on mobile (<768px) to conserve CPU and data.
+  --------------------------------------------------------- */
+  const isDesktop = () => window.innerWidth >= 768;
+  const allManagedVideos = $$(".hero__video, .services__video, .student-reg__video, .contact__video");
+
+  if ("IntersectionObserver" in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const vid = entry.target;
+        if (entry.isIntersecting) {
+          if (isDesktop() && !document.hidden && vid.paused) {
+            vid.play().catch(() => {});
+          }
+        } else {
+          if (!vid.paused) {
+            vid.pause();
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+
+    allManagedVideos.forEach((v) => videoObserver.observe(v));
+  } else {
+    // Graceful fallback for older engines
+    if (isDesktop()) {
+      allManagedVideos.forEach((v) => {
+        if (!document.hidden && v.paused) v.play().catch(() => {});
+      });
+    }
   }
 
-  // Reliable autoplay for Student Registration Background Video
-  const regVideo = $(".student-reg__video");
-  if (regVideo) {
-    const playReg = () => {
-      if (regVideo.paused) {
-        regVideo.play().catch(() => {});
-      }
-    };
-    playReg();
-    window.addEventListener("scroll", playReg, { once: true, passive: true });
-    document.addEventListener("touchstart", playReg, { once: true, passive: true });
+  // Handle tab switching / visibility changes globally
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      allManagedVideos.forEach((v) => { if (!v.paused) v.pause(); });
+    } else if (isDesktop()) {
+      allManagedVideos.forEach((v) => {
+        const rect = v.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0 && v.paused) {
+          v.play().catch(() => {});
+        }
+      });
+    }
+  });
+
+  // Mobile optimization: save bandwidth and hardware resources
+  if (!isDesktop()) {
+    allManagedVideos.forEach((v) => {
+      try {
+        v.pause();
+        v.removeAttribute("autoplay");
+      } catch (_) {}
+    });
   }
 
   /* ---------------------------------------------------------
@@ -622,7 +657,7 @@
       currentScene = ((idx % sceneTimes.length) + sceneTimes.length) % sceneTimes.length;
       try {
         heroVideo.currentTime = sceneTimes[currentScene];
-        if (heroVideo.paused && !document.hidden) {
+        if (heroVideo.paused && !document.hidden && isDesktop()) {
           heroVideo.play().catch(() => {});
         }
       } catch (_) {}
@@ -658,31 +693,6 @@
         currentScene = activeIdx;
         updateDots();
       }
-    });
-
-    // Make sure it starts playing immediately on desktop screens (>=768px)
-    const isDesktop = () => window.innerWidth >= 768;
-    if (!document.hidden && isDesktop()) {
-      heroVideo.play().catch(() => {});
-    }
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        if (!heroVideo.paused) heroVideo.pause();
-      } else if (isDesktop()) {
-        heroVideo.play().catch(() => {});
-      }
-    });
-  }
-
-  // Mobile & Video Performance Optimization: Pause and save bandwidth on mobile screens
-  if (window.innerWidth < 768) {
-    const bgVideos = document.querySelectorAll(".hero__video, .services__video, .student-reg__video");
-    bgVideos.forEach(v => {
-      try {
-        v.pause();
-        v.removeAttribute("autoplay");
-      } catch (_) {}
     });
   }
 
