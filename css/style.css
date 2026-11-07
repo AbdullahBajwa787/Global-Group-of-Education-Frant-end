@@ -1506,45 +1506,70 @@ h1 span,h2 span{
 }
 
 /* ============================================================
-   SERVICES (Clean & Bright Luxury Aesthetic)
+   SERVICES (2nd Image Royal Navy Gradient with Relevant Image)
    ============================================================ */
 .services{
   position:relative;
-  /* Clean & Luminous with Relevant Educational Advisory Background Image */
+  overflow:hidden;
+  background:#081434;
   background:
-    linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, rgba(255, 255, 255, 0.88) 50%, rgba(241, 245, 249, 0.94) 100%),
+    linear-gradient(135deg, rgba(8, 22, 60, 0.86) 0%, rgba(12, 34, 92, 0.74) 50%, rgba(16, 46, 122, 0.65) 100%),
+    linear-gradient(180deg, rgba(6, 16, 42, 0.75) 0%, transparent 20%, transparent 80%, rgba(6, 16, 42, 0.80) 100%),
     url('../assets/services-bg-poster.jpg') center/cover no-repeat;
   padding:var(--section-pad, clamp(70px,7vw,100px)) 0;
-  border-top:1px solid var(--line, #e2e8f0);
-  border-bottom:1px solid var(--line, #e2e8f0);
+  border-top:1px solid rgba(255,255,255,.1);
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 .services__video-bg{
-  display:none !important; /* Disabled dark video background for ultra-clean, bright presentation */
+  display:block !important;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:1;
+}
+.services__video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.02);
+  will-change:transform;
+  opacity:0.85;
+}
+.services__video-overlay{
+  position:absolute;
+  inset:0;
+  /* Exact Royal Navy Blue Gradient matching 2nd image */
+  background:
+    linear-gradient(135deg, rgba(8, 22, 60, 0.86) 0%, rgba(12, 34, 92, 0.74) 50%, rgba(16, 46, 122, 0.65) 100%),
+    linear-gradient(180deg, rgba(6, 16, 42, 0.75) 0%, transparent 20%, transparent 80%, rgba(6, 16, 42, 0.80) 100%);
+  z-index:2;
 }
 .services__content{
   position:relative;
-  z-index:2;
+  z-index:3;
 }
 .services .section__head h2{
-  color:var(--navy);
-  text-shadow:none;
+  color:#ffffff;
+  text-shadow:0 2px 14px rgba(0,0,0,.60);
 }
 .services .section__head h2 span{
-  background:linear-gradient(135deg, #f59e0b 0%, #fbbf24 60%, #d97706 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:#F1A71E;
+  -webkit-text-fill-color:#F1A71E;
+  background:none;
 }
 .services .section__head p{
-  color:var(--muted);
-  text-shadow:none;
+  color:#e2e8f0;
+  text-shadow:0 2px 10px rgba(0,0,0,.50);
 }
 .services .section__head .eyebrow{
-  color:var(--blue);
-  background:rgba(16,39,113,.08);
-  border:1px solid rgba(16,39,113,.15);
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
+  color:#F1A71E;
+  background:rgba(241,167,30,.22);
+  border:1px solid rgba(241,167,30,.45);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
 }
 
 .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;align-items:stretch}
