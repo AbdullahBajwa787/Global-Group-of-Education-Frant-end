@@ -285,7 +285,10 @@ h1 span,h2 span{
 }
 .hero__overlay{
   position:absolute;inset:0;
-  background:linear-gradient(135deg, rgba(16,39,113,.74) 0%, rgba(21,52,148,.68) 50%, rgba(16,39,113,.75) 100%);
+  /* Image 1 exact shade: directional dark cinematic vignette on left for clear text, 100% natural video on right with zero blue tint */
+  background:
+    linear-gradient(90deg, rgba(6, 14, 32, 0.90) 0%, rgba(8, 18, 42, 0.76) 34%, rgba(10, 24, 52, 0.38) 60%, rgba(10, 24, 52, 0.08) 82%, transparent 100%),
+    linear-gradient(180deg, rgba(4, 10, 24, 0.45) 0%, transparent 20%, transparent 80%, rgba(4, 10, 24, 0.40) 100%);
   z-index:2;
 }
 
@@ -1493,57 +1496,49 @@ h1 span,h2 span{
 }
 
 /* ============================================================
-   SERVICES
+   SERVICES (Clean & Bright Luxury Aesthetic)
    ============================================================ */
 .services{
   position:relative;
-  overflow:hidden;
-  background:#0b1a37;
+  background:var(--bg-soft, #f8fafc);
+  background:linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
   padding:var(--section-pad, clamp(70px,7vw,100px)) 0;
+  border-top:1px solid var(--line, #e2e8f0);
+  border-bottom:1px solid var(--line, #e2e8f0);
 }
 .services__video-bg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:1;
-}
-.services__video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transform:scale(1.02);
-  will-change:transform;
-  opacity:1;
-  filter:contrast(1.06) brightness(1.04) saturate(1.06);
-}
-.services__video-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg, rgba(16,39,113,.72) 0%, rgba(21,52,148,.68) 50%, rgba(16,39,113,.75) 100%);
-  z-index:2;
+  display:none !important; /* Disabled dark video background for ultra-clean, bright presentation */
 }
 .services__content{
   position:relative;
-  z-index:3;
+  z-index:2;
 }
-.services .section__head h2{color:#ffffff;text-shadow:0 2px 16px rgba(0,0,0,.70)}
-.services .section__head h2 span{color:#F1A71E;-webkit-text-fill-color:#F1A71E}
-.services .section__head p{color:#e2e8f0;text-shadow:0 2px 10px rgba(0,0,0,.60)}
+.services .section__head h2{
+  color:var(--navy);
+  text-shadow:none;
+}
+.services .section__head h2 span{
+  background:linear-gradient(135deg, #f59e0b 0%, #fbbf24 60%, #d97706 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.services .section__head p{
+  color:var(--muted);
+  text-shadow:none;
+}
 .services .section__head .eyebrow{
-  color:#F1A71E;
-  background:rgba(241,167,30,.22);
-  border:1px solid rgba(241,167,30,.45);
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
+  color:var(--blue);
+  background:rgba(16,39,113,.08);
+  border:1px solid rgba(16,39,113,.15);
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
 }
 
 .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;align-items:stretch}
 .service-card{
   background:#ffffff;
-  border:1px solid rgba(255,255,255,.18);
+  border:1px solid var(--line, #e2e8f0);
   border-radius:var(--radius-lg);
   padding:36px 30px 32px;
   transition:.35s cubic-bezier(.2,.7,.3,1);
@@ -1596,7 +1591,7 @@ h1 span,h2 span{
 .services-extra{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
 .services-extra__card{
   display:grid;grid-template-columns:200px 1fr;background:#ffffff;
-  border:1px solid rgba(255,255,255,.18);
+  border:1px solid var(--line, #e2e8f0);
   border-radius:var(--radius-lg);overflow:hidden;transition:.35s cubic-bezier(.2,.7,.3,1);
   position:relative;box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
