@@ -141,7 +141,7 @@ h1 span,h2 span{
 
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .logo__img{
-  width:48px;height:48px;object-fit:contain;border-radius:50%;display:block;flex-shrink:0;
+  width:54px;height:54px;object-fit:contain;border-radius:50%;display:block;flex-shrink:0;
   background:#fff;padding:2px;border:1.5px solid rgba(251,176,25,.4);
   box-shadow:0 4px 14px rgba(12,29,60,.12);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
 }
@@ -286,9 +286,19 @@ h1 span,h2 span{
 .hero__overlay{
   position:absolute;inset:0;
   /* Image 1 exact shade: directional dark cinematic vignette on left for clear text, 100% natural video on right with zero blue tint */
+  /* Vibrant Royal Navy-to-Cobalt Blue Gradient Shade behind headline that smoothly fades to crystal-clear video on the right */
   background:
-    linear-gradient(90deg, rgba(6, 14, 32, 0.90) 0%, rgba(8, 18, 42, 0.76) 34%, rgba(10, 24, 52, 0.38) 60%, rgba(10, 24, 52, 0.08) 82%, transparent 100%),
-    linear-gradient(180deg, rgba(4, 10, 24, 0.45) 0%, transparent 20%, transparent 80%, rgba(4, 10, 24, 0.40) 100%);
+    linear-gradient(90deg, 
+      rgba(10, 26, 68, 0.90) 0%, 
+      rgba(14, 40, 106, 0.82) 32%, 
+      rgba(20, 58, 148, 0.46) 58%, 
+      rgba(20, 58, 148, 0.10) 80%, 
+      transparent 100%),
+    linear-gradient(180deg, 
+      rgba(10, 26, 68, 0.45) 0%, 
+      transparent 20%, 
+      transparent 80%, 
+      rgba(10, 26, 68, 0.40) 100%);
   z-index:2;
 }
 
@@ -1500,8 +1510,10 @@ h1 span,h2 span{
    ============================================================ */
 .services{
   position:relative;
-  background:var(--bg-soft, #f8fafc);
-  background:linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
+  /* Clean & Luminous with Relevant Educational Advisory Background Image */
+  background:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.92) 0%, rgba(255, 255, 255, 0.88) 50%, rgba(241, 245, 249, 0.94) 100%),
+    url('../assets/services-bg-poster.jpg') center/cover no-repeat;
   padding:var(--section-pad, clamp(70px,7vw,100px)) 0;
   border-top:1px solid var(--line, #e2e8f0);
   border-bottom:1px solid var(--line, #e2e8f0);
