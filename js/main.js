@@ -579,21 +579,27 @@
 
   /* ---------------------------------------------------------
      VIEWPORT-AWARE VIDEO PERFORMANCE & SMOOTH PLAYBACK MANAGER
+     - Smooth video playback across desktop and mobile devices.
      - Intelligently pauses offscreen background videos to eliminate
        multi-decoder GPU saturation and scroll frame drops.
      - Automatically resumes playback as the user scrolls into view.
      - Pauses videos when tab is switched/hidden.
-     - Disables autoplay on mobile (<768px) to conserve CPU and data.
   --------------------------------------------------------- */
-  const isDesktop = () => window.innerWidth >= 768;
   const allManagedVideos = $$(".hero__video, .services__video, .student-reg__video, .contact__video");
+
+  // Ensure all background videos have necessary inline playback flags for mobile
+  allManagedVideos.forEach((v) => {
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+    v.muted = true;
+  });
 
   if ("IntersectionObserver" in window) {
     const videoObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const vid = entry.target;
         if (entry.isIntersecting) {
-          if (isDesktop() && !document.hidden && vid.paused) {
+          if (!document.hidden && vid.paused) {
             vid.play().catch(() => {});
           }
         } else {
@@ -606,19 +612,16 @@
 
     allManagedVideos.forEach((v) => videoObserver.observe(v));
   } else {
-    // Graceful fallback for older engines
-    if (isDesktop()) {
-      allManagedVideos.forEach((v) => {
-        if (!document.hidden && v.paused) v.play().catch(() => {});
-      });
-    }
+    allManagedVideos.forEach((v) => {
+      if (!document.hidden && v.paused) v.play().catch(() => {});
+    });
   }
 
   // Handle tab switching / visibility changes globally
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
       allManagedVideos.forEach((v) => { if (!v.paused) v.pause(); });
-    } else if (isDesktop()) {
+    } else {
       allManagedVideos.forEach((v) => {
         const rect = v.getBoundingClientRect();
         if (rect.top < window.innerHeight && rect.bottom > 0 && v.paused) {
@@ -627,16 +630,6 @@
       });
     }
   });
-
-  // Mobile optimization: save bandwidth and hardware resources
-  if (!isDesktop()) {
-    allManagedVideos.forEach((v) => {
-      try {
-        v.pause();
-        v.removeAttribute("autoplay");
-      } catch (_) {}
-    });
-  }
 
   /* ---------------------------------------------------------
      HERO SEAMLESS 60FPS CINEMATIC SCENE CONTROLLER
@@ -657,7 +650,7 @@
       currentScene = ((idx % sceneTimes.length) + sceneTimes.length) % sceneTimes.length;
       try {
         heroVideo.currentTime = sceneTimes[currentScene];
-        if (heroVideo.paused && !document.hidden && isDesktop()) {
+        if (heroVideo.paused && !document.hidden) {
           heroVideo.play().catch(() => {});
         }
       } catch (_) {}
