@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration | Global Group of Education</title>
+  <meta name="description"
+    content="Global Group of Education — Trusted study abroad consultants for UK, USA, Canada, Australia, Hungary & UAE. University admissions, visa guidance & scholarships.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Redundant high-availability CDN fallback to prevent tofu / empty boxes -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"
+    crossorigin="anonymous">
+  <link rel="preload" as="image"
+    href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68"
+    fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css?v=168">
+  <style>
+    /* Guaranteed instant visibility & live 1:1 real-time smooth scrolling */
+    html {
+      scroll-padding-top: 80px;
+      scrollbar-gutter: stable;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+
+    /* Clean high-performance GPU compositing without VRAM layer bloat */
+    .uni-track,
+    .testi-track,
+    .float-wa {
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= TOP BAR ================= -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <a href="mailto:london@globalgroupofeducation.com"><i class="fa-regular fa-envelope"></i>
+          london@globalgroupofeducation.com</a>
+        <span class="topbar__sep"></span>
+        <a href="#"><i class="fa-regular fa-clock"></i> Mon - Sat: 9:00 AM - 6:00 PM</a>
+      </div>
+      <div class="topbar__right">
+        <div class="topbar__socials">
+          <a href="https://www.facebook.com/globalgroupofeducationUKofficial/" aria-label="Facebook" target="_blank"
+            rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/globalgroupedu" aria-label="X" target="_blank" rel="noopener"><i
+              class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.youtube.com/@globalgroupofeducation" aria-label="YouTube" target="_blank"
+            rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.instagram.com/gge.pakistan/" aria-label="Instagram" target="_blank" rel="noopener"><i
+              class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/global-group-of-education/" aria-label="LinkedIn" target="_blank"
+            rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+        <a class="topbar__phone" href="https://wa.me/447586589659?text=I'm%20interested" target="_blank" rel="noopener">
+          <i class="fa-solid fa-phone"></i> +44 7586589659
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#home" class="logo" aria-label="Global Group of Education Home">
+        <img src="assets/logo.png" alt="Global Group of Education" class="logo__img" width="52" height="52">
+      </a>
+
+      <!-- Nav Backdrop Overlay (Mobile) -->
+      <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+      <nav class="nav" id="nav" aria-label="Main Navigation">
+        <!-- Mobile Drawer Head -->
+        <div class="nav__drawer-head">
+          <a href="#home" class="logo" aria-label="Global Group of Education Home">
+            <img src="assets/logo.png" alt="Global Group of Education" class="logo__img" width="46" height="46">
+          </a>
+          <button class="nav__close-btn" id="navCloseBtn" aria-label="Close navigation menu">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <ul class="nav__list">
+          <li>
+            <a href="#home" class="nav__link active">
+              <span class="nav__link-content"><i class="fa-solid fa-house nav__link-icon"></i> <span>Home</span></span>
+            </a>
+          </li>
+          <li class="nav__item--dropdown">
+            <button type="button" class="nav__link nav__dropdown-trigger" id="destDropdownTrigger"
+              aria-expanded="false" aria-haspopup="true" aria-controls="destDropdownMenu">
+              <span class="nav__link-content"><i class="fa-solid fa-earth-americas nav__link-icon"></i> <span>Study
+                  Destinations</span></span>
+              <i class="fa-solid fa-chevron-down nav__dropdown-arrow"></i>
+            </button>
+            <ul class="dropdown" id="destDropdownMenu">
+              <li><a href="#dest-uk" class="dropdown__link" data-open-dest="uk">Study In United Kingdom</a></li>
+              <li><a href="#dest-usa" class="dropdown__link" data-open-dest="usa">Study In United States of America</a></li>
+              <li><a href="#dest-canada" class="dropdown__link" data-open-dest="canada">Study In Canada</a></li>
+              <li><a href="#dest-australia" class="dropdown__link" data-open-dest="australia">Study In Australia</a></li>
+              <li><a href="#dest-hungary" class="dropdown__link" data-open-dest="hungary">Study In Hungary</a></li>
+              <li><a href="#dest-uae" class="dropdown__link" data-open-dest="uae">Study In United Arab of Emirates</a></li>
+            </ul>
+          </li>
+          <li class="nav__item--dropdown">
+            <button type="button" class="nav__link nav__dropdown-trigger" id="coursesDropdownTrigger"
+              aria-expanded="false" aria-haspopup="true" aria-controls="coursesDropdownMenu">
+              <span class="nav__link-content"><i class="fa-solid fa-graduation-cap nav__link-icon"></i> <span>Courses</span></span>
+              <i class="fa-solid fa-chevron-down nav__dropdown-arrow"></i>
+            </button>
+            <ul class="dropdown" id="coursesDropdownMenu">
+              <li><a href="#enquiry" class="dropdown__link" data-select-course="MBA / Business Management">Business &amp; Management (MBA / BBA)</a></li>
+              <li><a href="#enquiry" class="dropdown__link" data-select-course="Computer Science & IT">Computer Science &amp; IT / AI</a></li>
+              <li><a href="#enquiry" class="dropdown__link" data-select-course="Nursing & Healthcare">Nursing &amp; Health Sciences</a></li>
+              <li><a href="#enquiry" class="dropdown__link" data-select-course="Engineering">Engineering &amp; Technology</a></li>
+              <li><a href="#enquiry" class="dropdown__link" data-select-course="Law & Social Sciences">Law &amp; International Relations</a></li>
+              <li><a href="#enquiry" class="dropdown__link" data-select-course="Hospitality & Tourism">Hospitality &amp; Tourism Management</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#services" class="nav__link">
+              <span class="nav__link-content"><i class="fa-solid fa-briefcase nav__link-icon"></i> <span>Our
+                  Services</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="#about" class="nav__link">
+              <span class="nav__link-content"><i class="fa-solid fa-building-columns nav__link-icon"></i> <span>About
+                  Us</span></span>
+            </a>
+          </li>
+          <li>
+            <a href="#contact" class="nav__link">
+              <span class="nav__link-content"><i class="fa-solid fa-phone nav__link-icon"></i> <span>Contact
+                  Us</span></span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Mobile Drawer Footer Actions -->
+        <div class="nav__drawer-footer">
+          <a href="#enquiry" class="btn btn--accent btn--block nav__drawer-cta">
+            <i class="fa-solid fa-graduation-cap"></i> Student Registration
+          </a>
+          <a href="https://wa.me/447586589659?text=Hello%20Global%20Group%20of%20Education%2C%20I%20want%20to%20inquire%20about%20admissions."
+            class="btn btn--ghost btn--block nav__drawer-wa" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+          <div class="nav__drawer-meta">
+            <span><i class="fa-solid fa-location-dot"></i> London &bull; Sahiwal</span>
+            <span><i class="fa-solid fa-award"></i> British Council Certified</span>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header__actions">
+        <a href="https://wa.me/447586589659?text=I'm%20interested" class="btn btn--primary header__cta" target="_blank"
+          rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> +44 7586589659
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="nav"
+          aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  
+  <!-- ================= PAGE BANNER ================= -->
+  <section class="page-banner" style="background: linear-gradient(135deg, rgba(8, 24, 68, 0.95), rgba(12, 36, 100, 0.88)), url('assets/hero-poster.jpg') center/cover no-repeat; padding: 140px 0 60px; color: #fff; text-align: center;">
+    <div class="container">
+      <span class="eyebrow" style="color: #f59e0b; background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); padding: 6px 16px; border-radius: 8px; font-weight: 700; font-size: 0.82rem;">Admissions 2026</span>
+      <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin: 16px 0 12px; color: #fff;">Online <span style="color: #f59e0b;">Student Registration</span></h1>
+      <p style="max-width: 620px; margin: 0 auto; color: #cbd5e1; font-size: 1.05rem;">Apply for admissions to top-ranked universities in the UK, USA, Canada, Australia, Hungary &amp; UAE with 100% free consultation.</p>
+    </div>
+  </section>
+
+<!-- ================= STUDENT REGISTRATION ================= -->
+  <section class="section student-reg-section" id="enquiry">
+    <div class="student-reg__video-bg">
+      <video class="student-reg__video" id="studentRegVideo" autoplay muted loop playsinline preload="metadata" poster="assets/student-reg-poster.jpg?v=3">
+        <source src="assets/student-reg-bg-video.mp4?v=3" type="video/mp4">
+      </video>
+      <div class="student-reg__video-overlay"></div>
+    </div>
+    <div class="container student-reg__content">
+      <div class="student-reg-card reveal">
+        <!-- Form Side -->
+        <div class="student-reg__form-side">
+          <h2 class="student-reg__title">Student Registration</h2>
+          <form id="studentRegForm" class="student-reg__form" novalidate>
+            <div class="student-reg__grid">
+              <!-- Row 1 -->
+              <div class="reg-field" data-required="true">
+                <input type="text" name="firstName" placeholder="First Name" required class="reg-input"
+                  id="regFirstName">
+                <span class="reg-error">This Field is Required</span>
+              </div>
+              <div class="reg-field">
+                <input type="text" name="lastName" placeholder="Last Name" class="reg-input" id="regLastName">
+                <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+              </div>
+              <div class="reg-field" data-required="true">
+                <div class="reg-phone-wrap">
+                  <span class="reg-phone-code"><span class="reg-flag">🇬🇧</span> +44 ▾</span>
+                  <input type="tel" name="phone" placeholder="Mobile" required class="reg-input" id="regPhone">
+                </div>
+                <span class="reg-error">This Field is Required</span>
+              </div>
+
+              <!-- Row 2 -->
+              <div class="reg-field" data-required="true">
+                <input type="email" name="email" placeholder="Email" required class="reg-input" id="regEmail">
+                <span class="reg-error">This Field is Required</span>
+              </div>
+              <div class="reg-field">
+                <input type="text" name="dob" placeholder="Date Of Birth" onfocus="this.type='date'"
+                  onblur="if(!this.value)this.type='text'" class="reg-input" id="regDob">
+                <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+              </div>
+              <div class="reg-field" data-required="true">
+                <select name="nationality" required class="reg-select" id="regNationality">
+                  <option value="" disabled selected>Select Nationality ▾</option>
+                  <option value="Pakistani">Pakistani</option>
+                  <option value="British">British</option>
+                  <option value="Indian">Indian</option>
+                  <option value="Nigerian">Nigerian</option>
+                  <option value="Bangladeshi">Bangladeshi</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="reg-error">This Field is Required</span>
+              </div>
+
+              <!-- Row 3 -->
+              <div class="reg-field">
+                <select name="gender" class="reg-select" id="regGender">
+                  <option value="" disabled selected>Select Gender ▾</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+              </div>
+              <div class="reg-field" data-required="true">
+                <select name="level" required class="reg-select" id="regLevel">
+                  <option value="" disabled selected>Select Level ▾</option>
+                  <option value="Undergraduate">Undergraduate</option>
+                  <option value="Postgraduate">Postgraduate</option>
+                  <option value="Foundation">Foundation</option>
+                  <option value="Pre-Master">Pre-Master</option>
+                  <option value="Doctorate (PhD)">Doctorate (PhD)</option>
+                  <option value="English Language">English Language</option>
+                </select>
+                <span class="reg-error">This Field is Required</span>
+              </div>
+              <div class="reg-field">
+                <select name="country" class="reg-select" id="regCountry">
+                  <option value="" disabled selected>Select Country +</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="United States of America">United States of America</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Australia">Australia</option>
+                  <option value="Hungary">Hungary</option>
+                  <option value="United Arab Emirates">United Arab Emirates</option>
+                </select>
+                <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+              </div>
+
+              <!-- Row 4 -->
+              <div class="reg-field">
+                <input type="text" name="intake" placeholder="Intake" class="reg-input" id="regIntake">
+                <span class="reg-error reg-error--spacer" aria-hidden="true">&nbsp;</span>
+              </div>
+              <div class="reg-field" data-required="true">
+                <select name="course" required class="reg-select" id="regCourse">
+                  <option value="" disabled selected>Select Course ▾</option>
+                  <option value="MBA / Business Management">MBA / Business Management</option>
+                  <option value="Computer Science & IT">Computer Science &amp; IT</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Nursing & Healthcare">Nursing &amp; Healthcare</option>
+                  <option value="Law & Social Sciences">Law &amp; Social Sciences</option>
+                  <option value="Hospitality & Tourism">Hospitality &amp; Tourism</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="reg-error">This Field is Required</span>
+              </div>
+              <div class="reg-field reg-field--empty"></div>
+            </div>
+
+            <div class="student-reg__actions">
+              <button type="submit" class="student-reg__btn" id="regSubmitBtn">Submit</button>
+              <p class="form-note" id="regNote"></p>
+            </div>
+          </form>
+        </div>
+
+        <!-- QR Side -->
+        <div class="student-reg__qr-side">
+          <a href="https://wa.me/447586589659?text=Hello%20Global%20Group%20of%20Education%2C%20I%20want%20to%20register%20as%20a%20student."
+            target="_blank" rel="noopener" class="student-reg__qr-box" title="Click or Scan QR to register">
+            <div class="student-reg__qr-inner">
+              <img src="assets/qr-code-hd.png" alt="Scan QR For Student Registration" width="90" height="90"
+                class="student-reg__qr-img" loading="lazy" decoding="async">
+            </div>
+          </a>
+          <h4 class="student-reg__qr-title">Scan QR For Student<br>Registration</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+<!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="#" class="logo logo--light">
+          <img src="assets/logo.png" alt="Global Group of Education" class="logo__img" width="46" height="46">
+          <span class="logo__text"><strong>Global Group</strong><small>of Education</small></span>
+        </a>
+        <p>A trusted international education group connecting ambitious students with world-class universities since
+          2020.</p>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/globalgroupofeducationUKofficial/" target="_blank" rel="noopener"
+            aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/globalgroupedu" target="_blank" rel="noopener" aria-label="X"><i
+              class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.youtube.com/@globalgroupofeducation" target="_blank" rel="noopener"
+            aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://www.instagram.com/gge.pakistan/" target="_blank" rel="noopener" aria-label="Instagram"><i
+              class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/global-group-of-education/" target="_blank" rel="noopener"
+            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="#about">About Our Mission</a></li>
+          <li><a href="#destinations">Study Destinations</a></li>
+          <li><a href="#enquiry">Free Registration</a></li>
+          <li><a href="#testimonials">Alumni Stories</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Living Abroad</h4>
+        <ul>
+          <li><a href="#universities">Top Ranking Universities</a></li>
+          <li><a href="#destinations">Choose Your Destination</a></li>
+          <li><a href="#about">About Our Mission</a></li>
+          <li><a href="#enquiry">Student Registration</a></li>
+          <li><a href="#services">Our Expertise</a></li>
+          <li><a href="#contact">Living Abroad Guidance</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Trending Universities</h4>
+        <ul>
+          <li><a href="#universities">University of Chichester</a></li>
+          <li><a href="#universities">University of Sunderland</a></li>
+          <li><a href="#universities">University of Bolton</a></li>
+          <li><a href="#universities">Falmouth University</a></li>
+          <li><a href="#universities">Queen's University Belfast</a></li>
+          <li><a href="#universities">University of Surrey</a></li>
+        </ul>
+      </div>
+
+
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>© 2020 Global Group of Education. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#">Terms &amp; Conditions</a><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= DESTINATION DETAIL MODAL ================= -->
+  <div class="dest-modal" id="destModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="destModalTitle">
+    <div class="dest-modal__backdrop" id="destModalBackdrop"></div>
+    <div class="dest-modal__dialog">
+      <button type="button" class="dest-modal__close" id="destModalClose" aria-label="Close details">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="dest-modal__header">
+        <div class="dest-modal__badge" id="destModalBadge"><span class="dest-flag" id="destModalFlag">🇬🇧</span> <span id="destModalCountry">United Kingdom</span></div>
+        <h3 class="dest-modal__title" id="destModalTitle">Study In United Kingdom</h3>
+        <p class="dest-modal__tag" id="destModalTag">British Council Certified Admissions</p>
+      </div>
+
+      <div class="dest-modal__body">
+        <p class="dest-modal__overview" id="destModalOverview"></p>
+
+        <div class="dest-modal__facts">
+          <div class="dest-fact-item">
+            <i class="fa-solid fa-calendar-check"></i>
+            <div>
+              <strong>Next Intakes</strong>
+              <span id="destModalIntakes">January · May · September</span>
+            </div>
+          </div>
+          <div class="dest-fact-item">
+            <i class="fa-solid fa-briefcase"></i>
+            <div>
+              <strong>Post-Study Work</strong>
+              <span id="destModalWork">2-Year Graduate Route Visa</span>
+            </div>
+          </div>
+          <div class="dest-fact-item">
+            <i class="fa-solid fa-layer-group"></i>
+            <div>
+              <strong>Degree Levels</strong>
+              <span id="destModalDegrees">Undergraduate · Postgraduate · PhD</span>
+            </div>
+          </div>
+          <div class="dest-fact-item">
+            <i class="fa-solid fa-coins"></i>
+            <div>
+              <strong>Tuition &amp; Aid</strong>
+              <span id="destModalFee">Scholarships available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dest-modal__unis">
+          <h4><i class="fa-solid fa-building-columns"></i> Top Partner Universities</h4>
+          <p id="destModalUnis"></p>
+        </div>
+
+        <div class="dest-modal__benefits">
+          <h4><i class="fa-solid fa-star"></i> Key Advantages</h4>
+          <ul id="destModalBenefits"></ul>
+        </div>
+      </div>
+
+      <div class="dest-modal__footer">
+        <button type="button" class="btn btn--accent dest-modal__apply-btn" id="destModalApplyBtn">
+          <span>Apply for Free</span> <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <a href="#" class="btn btn--ghost dest-modal__wa-btn" id="destModalWaBtn" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> <span>Ask on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to top -->
+  <button class="to-top" id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- Floating WhatsApp Quick Action -->
+  <a href="https://wa.me/447586589659?text=Hello%20Global%20Group%20of%20Education%2C%20I%20would%20like%20to%20inquire%20about%20studying%20abroad."
+    class="float-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span class="float-wa__pulse"></span>
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="float-wa__tooltip">Chat with Advisor</span>
+  </a>
+
+  <script src="js/main.js?v=168" defer></script>
+</body>
+
+</html>

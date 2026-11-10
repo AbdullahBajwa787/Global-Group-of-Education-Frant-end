@@ -585,7 +585,7 @@
      - Automatically resumes playback as the user scrolls into view.
      - Pauses videos when tab is switched/hidden.
   --------------------------------------------------------- */
-  const allManagedVideos = $$(".hero__video, .services__video, .student-reg__video, .contact__video");
+  const allManagedVideos = $$(".hero__video, .contact__video");
 
   // Ensure all background videos have necessary inline playback flags for mobile
   allManagedVideos.forEach((v) => {
