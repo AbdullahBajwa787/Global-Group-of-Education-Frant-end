@@ -2224,22 +2224,94 @@ h1 span,h2 span{
 
 
 /* ============================================================
-   REVEAL ANIMATION (Instant Solid 240Hz Rendering)
+   SMOOTH SCROLL REVEAL ANIMATIONS (Fluid Aesthetic Motion)
    ============================================================ */
-html{scroll-behavior:smooth}
-.reveal{
-  opacity:1 !important;
-  transform:none !important;
-  transition:none !important;
+html {
+  scroll-behavior: smooth;
 }
-.reveal.visible{
-  opacity:1 !important;
-  transform:none !important;
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  .reveal{opacity:1;transform:none;transition:none;will-change:auto}
-  .reveal.visible{transform:none}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Directional & Zoom reveal variants */
+.reveal--left {
+  opacity: 0;
+  transform: translateX(-38px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal--right {
+  opacity: 0;
+  transform: translateX(38px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal--zoom {
+  opacity: 0;
+  transform: scale(0.93) translateY(22px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--zoom.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Staggered card animation sequences for multi-item grids */
+.services-grid .service-card:nth-child(1) { transition-delay: 0.04s; }
+.services-grid .service-card:nth-child(2) { transition-delay: 0.12s; }
+.services-grid .service-card:nth-child(3) { transition-delay: 0.20s; }
+.services-grid .service-card:nth-child(4) { transition-delay: 0.28s; }
+.services-grid .service-card:nth-child(5) { transition-delay: 0.36s; }
+.services-grid .service-card:nth-child(6) { transition-delay: 0.44s; }
+
+.stats__grid .stat:nth-child(1) { transition-delay: 0.06s; }
+.stats__grid .stat:nth-child(2) { transition-delay: 0.16s; }
+.stats__grid .stat:nth-child(3) { transition-delay: 0.26s; }
+.stats__grid .stat:nth-child(4) { transition-delay: 0.36s; }
+
+.dest-grid .dest-card:nth-child(1) { transition-delay: 0.05s; }
+.dest-grid .dest-card:nth-child(2) { transition-delay: 0.12s; }
+.dest-grid .dest-card:nth-child(3) { transition-delay: 0.19s; }
+.dest-grid .dest-card:nth-child(4) { transition-delay: 0.26s; }
+.dest-grid .dest-card:nth-child(5) { transition-delay: 0.33s; }
+.dest-grid .dest-card:nth-child(6) { transition-delay: 0.40s; }
+
+.trust__inner .trust__item:nth-child(1) { transition-delay: 0.05s; }
+.trust__inner .trust__item:nth-child(2) { transition-delay: 0.14s; }
+.trust__inner .trust__item:nth-child(3) { transition-delay: 0.23s; }
+.trust__inner .trust__item:nth-child(4) { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .reveal--left, .reveal--right, .reveal--zoom {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
 }
 
 /* ============================================================

@@ -8,10 +8,43 @@
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
   /* ---------------------------------------------------------
-     SCROLL REVEAL + COUNTERS
+     SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER DRIVEN)
   --------------------------------------------------------- */
   function observeReveals() {
-    $$(".reveal").forEach(el => el.classList.add("visible"));
+    const reveals = $$(".reveal");
+    if (!reveals.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      reveals.forEach(el => el.classList.add("visible"));
+      return;
+    }
+
+    const revealObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: "0px 0px -40px 0px",
+      threshold: 0.10
+    });
+
+    reveals.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      // If already in the viewport upon initial page load, reveal immediately
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add("visible");
+      } else {
+        revealObserver.observe(el);
+      }
+    });
+
+    // Fallback safety: ensure all content stays visible after 3s even if not scrolled
+    setTimeout(() => {
+      reveals.forEach(el => el.classList.add("visible"));
+    }, 3000);
   }
   observeReveals();
 

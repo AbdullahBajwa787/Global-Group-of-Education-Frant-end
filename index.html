@@ -23,7 +23,7 @@
   <link rel="preload" as="image"
     href="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=68"
     fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=171">
+  <link rel="stylesheet" href="css/style.css?v=172">
   <style>
     /* Guaranteed instant visibility & live 1:1 real-time smooth scrolling */
     html {
@@ -33,11 +33,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .reveal {
-      opacity: 1 !important;
-      transform: none !important;
-      visibility: visible !important;
-    }
+    
 
     /* Clean high-performance GPU compositing without VRAM layer bloat */
     .uni-track,
@@ -244,19 +240,19 @@
   <!-- ================= TRUST STRIP ================= -->
   <section class="trust">
     <div class="container trust__inner">
-      <div class="trust__item">
+      <div class="trust__item reveal">
         <div class="trust__icon"><i class="fa-solid fa-award"></i></div>
         <div><strong>British Council</strong><span>Certified Education Agent</span></div>
       </div>
-      <div class="trust__item">
+      <div class="trust__item reveal">
         <div class="trust__icon"><i class="fa-solid fa-shield-halved"></i></div>
         <div><strong>100% Visa Track</strong><span>Documented High Success</span></div>
       </div>
-      <div class="trust__item">
+      <div class="trust__item reveal">
         <div class="trust__icon"><i class="fa-solid fa-earth-europe"></i></div>
         <div><strong>6 Destinations</strong><span>UK · USA · CA · AU · HU · UAE</span></div>
       </div>
-      <div class="trust__item">
+      <div class="trust__item reveal">
         <div class="trust__icon"><i class="fa-solid fa-user-graduate"></i></div>
         <div><strong>3,935+ Alumni</strong><span>Enrolled Worldwide</span></div>
       </div>
@@ -273,7 +269,7 @@
       </div>
     </div>
 
-    <div class="uni-marquee" aria-label="Partner universities">
+    <div class="uni-marquee reveal" aria-label="Partner universities">
       <div class="uni-track" id="uniGrid"></div>
     </div>
   </section>
@@ -358,7 +354,7 @@
     <div class="container">
       <div class="about__layout">
         <!-- Media Column (Image & Experience Counter) -->
-        <div class="about-media">
+        <div class="about-media reveal reveal--left">
           <figure class="about-media__fig">
             <img src="assets/abt-img2.png" alt="Successful Student Graduate - Global Group of Education" width="270"
               height="376" loading="lazy" decoding="async">
@@ -376,7 +372,7 @@
         </div>
 
         <!-- Content Column -->
-        <div class="about-content">
+        <div class="about-content reveal reveal--right">
           <div class="about-eyebrow">
             <span>ABOUT US</span>
             <span class="about-eyebrow__bar" aria-hidden="true"></span>
@@ -476,7 +472,7 @@
       <!-- 6 Study Destinations Grid -->
       <div class="dest-grid reveal" id="destGrid">
         <!-- 1. United Kingdom -->
-        <article class="dest-card" id="dest-uk" style="--img:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=75')" data-dest="uk">
+        <article class="dest-card reveal" id="dest-uk" style="--img:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=75')" data-dest="uk">
           <div class="dest-card__badge"><span class="dest-flag">🇬🇧</span> United Kingdom</div>
           <div class="dest-card__body">
             <span>400+ Partner Universities</span>
@@ -489,7 +485,7 @@
         </article>
 
         <!-- 2. USA -->
-        <article class="dest-card" id="dest-usa" style="--img:url('https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=800&q=75')" data-dest="usa">
+        <article class="dest-card reveal" id="dest-usa" style="--img:url('https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=800&q=75')" data-dest="usa">
           <div class="dest-card__badge"><span class="dest-flag">🇺🇸</span> USA</div>
           <div class="dest-card__body">
             <span>350+ Partner Universities</span>
@@ -502,7 +498,7 @@
         </article>
 
         <!-- 3. Canada -->
-        <article class="dest-card" id="dest-canada" style="--img:url('https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=800&q=75')" data-dest="canada">
+        <article class="dest-card reveal" id="dest-canada" style="--img:url('https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=800&q=75')" data-dest="canada">
           <div class="dest-card__badge"><span class="dest-flag">🇨🇦</span> Canada</div>
           <div class="dest-card__body">
             <span>280+ Partner Universities</span>
@@ -515,7 +511,7 @@
         </article>
 
         <!-- 4. Australia -->
-        <article class="dest-card" id="dest-australia" style="--img:url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=75')" data-dest="australia">
+        <article class="dest-card reveal" id="dest-australia" style="--img:url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=75')" data-dest="australia">
           <div class="dest-card__badge"><span class="dest-flag">🇦🇺</span> Australia</div>
           <div class="dest-card__body">
             <span>240+ Partner Universities</span>
@@ -528,7 +524,7 @@
         </article>
 
         <!-- 5. Hungary -->
-        <article class="dest-card" id="dest-hungary" style="--img:url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=75')" data-dest="hungary">
+        <article class="dest-card reveal" id="dest-hungary" style="--img:url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=75')" data-dest="hungary">
           <div class="dest-card__badge"><span class="dest-flag">🇭🇺</span> Hungary</div>
           <div class="dest-card__body">
             <span>120+ Partner Universities</span>
@@ -541,7 +537,7 @@
         </article>
 
         <!-- 6. UAE -->
-        <article class="dest-card" id="dest-uae" style="--img:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=75')" data-dest="uae">
+        <article class="dest-card reveal" id="dest-uae" style="--img:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=75')" data-dest="uae">
           <div class="dest-card__badge"><span class="dest-flag">🇦🇪</span> UAE</div>
           <div class="dest-card__body">
             <span>160+ Partner Universities</span>
@@ -777,7 +773,7 @@
         </div>
       </div>
 
-      <div class="footer__col">
+      <div class="footer__col reveal">
         <h4>Quick Links</h4>
         <ul>
           <li><a href="#services">Our Services</a></li>
@@ -789,7 +785,7 @@
         </ul>
       </div>
 
-      <div class="footer__col">
+      <div class="footer__col reveal">
         <h4>Living Abroad</h4>
         <ul>
           <li><a href="#universities">Top Ranking Universities</a></li>
@@ -801,7 +797,7 @@
         </ul>
       </div>
 
-      <div class="footer__col">
+      <div class="footer__col reveal">
         <h4>Trending Universities</h4>
         <ul>
           <li><a href="#universities">University of Chichester</a></li>
@@ -907,7 +903,7 @@
     <span class="float-wa__tooltip">Chat with Advisor</span>
   </a>
 
-  <script src="js/main.js?v=171" defer></script>
+  <script src="js/main.js?v=172" defer></script>
 </body>
 
 </html>
