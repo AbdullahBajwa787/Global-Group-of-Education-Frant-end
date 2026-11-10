@@ -842,3 +842,20 @@
   });
 
 })();
+
+
+  // Explicit redirect for Hero Apply button
+  const heroApplyBtn = $("#heroApplyBtn");
+  if (heroApplyBtn) {
+    heroApplyBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "https://global-group-of-education.vercel.app/student-registration.html";
+    });
+  }
+  const drawerApplyBtn = $("#drawerApplyBtn");
+  if (drawerApplyBtn) {
+    drawerApplyBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "https://global-group-of-education.vercel.app/student-registration.html";
+    });
+  }
