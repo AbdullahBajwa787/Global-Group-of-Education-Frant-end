@@ -430,30 +430,8 @@
     destModalApplyBtn.addEventListener("click", () => {
       const data = activeDestKey ? DESTINATIONS_DATA[activeDestKey] : null;
       closeDestModal();
-
-      // Auto-select country in student registration form
-      const regCountry = $("#regCountry");
-      if (regCountry && data) {
-        for (let i = 0; i < regCountry.options.length; i++) {
-          if (regCountry.options[i].value === data.country || regCountry.options[i].text.includes(data.country)) {
-            regCountry.selectedIndex = i;
-            regCountry.dispatchEvent(new Event("change", { bubbles: true }));
-            const field = regCountry.closest(".reg-field");
-            if (field) field.classList.add("is-filled");
-            break;
-          }
-        }
-      }
-
-      // Smooth scroll to Student Registration section
-      const enquirySection = $("#enquiry");
-      if (enquirySection) {
-        enquirySection.scrollIntoView({ behavior: "smooth" });
-        setTimeout(() => {
-          const firstInput = $("#regFirstName");
-          if (firstInput) firstInput.focus();
-        }, 600);
-      }
+      const countryParam = data && data.country ? encodeURIComponent(data.country) : "";
+      window.location.href = `student-registration.html${countryParam ? `?country=${countryParam}` : ""}`;
     });
   }
 
@@ -733,6 +711,25 @@
   --------------------------------------------------------- */
   const studentRegForm = $("#studentRegForm");
   if (studentRegForm) {
+    // Auto-select country if passed via URL (?country=United+Kingdom)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const countryParam = urlParams.get("country");
+      if (countryParam) {
+        const regCountry = $("#regCountry");
+        if (regCountry) {
+          for (let i = 0; i < regCountry.options.length; i++) {
+            if (regCountry.options[i].value.toLowerCase().includes(countryParam.toLowerCase()) || 
+                countryParam.toLowerCase().includes(regCountry.options[i].value.toLowerCase())) {
+              regCountry.selectedIndex = i;
+              const field = regCountry.closest(".reg-field");
+              if (field) field.classList.add("is-filled");
+              break;
+            }
+          }
+        }
+      }
+    } catch (_) {}
     const updateFieldState = (el) => {
       const field = el.closest(".reg-field");
       if (!field) return;
